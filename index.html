@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bharath Raj B | Portfolio</title>
+    <meta name="description"
+        content="Bharath Raj B - CSBS Student & Full-Stack Developer skilled in ML, IoT, and Full-Stack Development">
+    <meta name="keywords" content="portfolio, developer, machine learning, full-stack, IoT, Bharath Raj">
+    <meta property="og:title" content="Bharath Raj B | Portfolio">
+    <meta property="og:description" content="CSBS Student & Full-Stack Developer">
+    <meta property="og:image" content="br.jpg">
+    <meta property="og:url" content="https://yourportfolio.com">
+    <meta name="theme-color" content="#4a6cf7">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container nav-container">
+            <a href="#home" class="logo">Bharath<span>Raj</span></a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <!-- Theme Toggle -->
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i>
+                </button>
+
+                <!-- Mobile Menu Toggle -->
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Visitor Counter (Floating) -->
+    <div class="visitor-counter" id="visitorCounter">
+        <i class="fas fa-eye"></i>
+        <span id="visitorCount">1</span> visitors
+    </div>
+
+    <!-- Floating Contact Button -->
+    <div class="floating-contact" id="floatingContact">
+        <button class="chat-btn" id="chatBtn" aria-label="Open chat">
+            <i class="fas fa-comment"></i>
+        </button>
+        <div class="quick-form" id="quickForm">
+            <h4>Quick Message</h4>
+            <input type="text" placeholder="Your Name" id="quickName">
+            <textarea placeholder="Your Message" id="quickMessage"></textarea>
+            <button class="btn primary-btn" id="sendQuickMessage">Send</button>
+        </div>
+    </div>
+
+    <!-- Hero Section with Particles -->
+    <section id="home" class="hero">
+        <div id="particles-js"></div>
+        <div class="container hero-container">
+            <div class="hero-text">
+                <h4>Hello, I'm</h4>
+                <h1>BHARATH RAJ B</h1>
+                <h2 id="typing-text">CSBS Student & Full-Stack Developer</h2>
+                <p>Passionate about creating scalable cloud-ready applications, working with REST APIs, and
+                    collaborating in Agile environments.</p>
+                <div class="hero-btns">
+                    <a href="#projects" class="btn primary-btn">View My Work</a>
+                    <a href="#contact" class="btn secondary-btn">Contact Me</a>
+                </div>
+
+                <!-- Download Resume Button -->
+                <div class="resume-download">
+                    <a href="Bharath_Raj_Resume.pdf" download class="btn download-btn" id="downloadResume">
+                        <i class="fas fa-download"></i> Download Resume
+                    </a>
+                </div>
+
+                <!-- GitHub Stats -->
+                <div class="github-stats" id="githubStats">
+                    <div class="stat-item">
+                        <i class="fab fa-github"></i>
+                        <div>
+                            <h4 id="repoCount">12</h4>
+                            <p>Repositories</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-star"></i>
+                        <div>
+                            <h4 id="followerCount">24</h4>
+                            <p>Followers</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="image-wrapper">
+                    <img src="br.jpg" alt="Bharath Raj" id="profileImage">
+                    <div class="image-overlay"></div>
+                </div>
+                <!-- Achievement Badges - Moved below image -->
+                <div class="achievement-badges">
+                    <span class="badge" data-tooltip="LeetCode 150+ Problems">
+                        <i class="fas fa-code"></i>
+                    </span>
+                    <span class="badge" data-tooltip="Vishwakarma Top 6">
+                        <i class="fas fa-trophy"></i>
+                    </span>
+                    <span class="badge" data-tooltip="UI/UX Intern">
+                        <i class="fas fa-palette"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-container">
+                <div class="about-text">
+                    <h3>Enthusiastic CSBS Student</h3>
+                    <p>Skilled in machine learning, data analytics, and full-stack development, with hands-on experience
+                        building real-time IoT and AI-driven systems. Strong at problem-solving, writing clean
+                        production-ready code, and working in fast-paced, collaborative environments.</p>
+
+                    <!-- Interactive Timeline -->
+                    <div class="timeline-section">
+                        <h4>My Journey</h4>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-date">2020-2021</div>
+                                <div class="timeline-content">
+                                    <h5>SSLC - 95%</h5>
+                                    <p>Vailankanni Public School (CBSE)</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">2022-2023</div>
+                                <div class="timeline-content">
+                                    <h5>HSC - 92%</h5>
+                                    <p>Vailankanni Public School (CBSE)</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">2023-2027</div>
+                                <div class="timeline-content">
+                                    <h5>B.Tech CSBS - CGPA: 8.00</h5>
+                                    <p>Dr.N.G.P Institute Of Technology</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Certifications - MOVED HERE -->
+                    <div class="certifications">
+                        <h4>Certifications</h4>
+                        <ul>
+                            <li>Introduction To Internet Of Things - NPTEL 2025</li>
+                            <li>Agile Methodologies - Techcanvass 2025</li>
+                            <li>Java Programming - Great Learning 2024</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="about-sidebar">
+                    <div class="contact-info">
+                        <h4>Contact Information</h4>
+                        <p><i class="fas fa-phone"></i> +91 9943935576</p>
+                        <p><i class="fas fa-envelope"></i> bharathrajmurali1010@gmail.com</p>
+                        <div class="social-links">
+                            <a href="https://www.linkedin.com/in/bharath-raj-b-36388932a/" target="_blank">
+                                <img src="https://static.vecteezy.com/system/resources/previews/018/930/480/non_2x/linkedin-logo-linkedin-icon-transparent-free-png.png"
+                                    alt="LinkedIn" class="social-logo">
+                                LinkedIn
+                            </a>
+                            <a href="https://github.com/Bharath-B100" target="_blank">
+                                <img src="https://images.seeklogo.com/logo-png/30/2/github-logo-png_seeklogo-304612.png"
+                                    alt="GitHub" class="social-logo">
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="achievements">
+                        <h4>Achievements</h4>
+                        <ul>
+                            <li>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png"
+                                    alt="LeetCode" class="achievement-icon">
+                                LeetCode Max Rating: 1462 | 150+ Problems Solved
+                            </li>
+                            <li>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/HackerRank_logo.png"
+                                    alt="HackerRank" class="achievement-icon">
+                                HackerRank: 100+ Problems Solved | 3+ Certificates
+                            </li>
+                            <li>Vishwakarma Awards 2024: Top 6 Finalist among 3000+ teams</li>
+                            <li>Paper Presentation Winner & Runner-up</li>
+                        </ul>
+
+                        <!-- Coding Stats -->
+                        <div class="coding-stats">
+                            <h5>Live Coding Stats</h5>
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <h6 id="leetcodeSolved">150+</h6>
+                                    <p>LeetCode</p>
+                                </div>
+                                <div class="stat-card">
+                                    <h6 id="hackerrankSolved">100+</h6>
+                                    <p>HackerRank</p>
+                                </div>
+                                <div class="stat-card">
+                                    <h6>1462</h6>
+                                    <p>Max Rating</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section dark-section">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience-container">
+                <div class="experience-card">
+                    <div class="exp-header">
+                        <h3>UI/UX Design Intern</h3>
+                        <span class="company">Sri Nandha Infotech</span>
+                        <span class="date">2025</span>
+                    </div>
+                    <ul class="exp-details">
+                        <li>Designed 10+ responsive UI screens, improving usability and visual consistency across
+                            devices</li>
+                        <li>Enhanced page usability through UX principles and iterative testing, reducing navigation
+                            issues by ~25%</li>
+                        <li>Collaborated with product teams to deliver pixel-accurate Figma mockups for production-ready
+                            interfaces</li>
+                    </ul>
+                    <div class="tech-stack">
+                        <span>Figma</span>
+                        <span>Canva</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-container">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Smart Spending Analysis</h3>
+                        <span class="date">2025</span>
+                    </div>
+                    <p>Developed a data science–powered expense analyzer using Python, Pandas, and Power BI</p>
+                    <ul>
+                        <li>Automated spending categorization, improving tracking efficiency by 40%</li>
+                        <li>Created interactive dashboards for budgeting, alerts, and savings insights</li>
+                    </ul>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>Pandas</span>
+                        <span>Power BI</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Financial Portfolio Management System</h3>
+                        <span class="date">2025</span>
+                    </div>
+                    <p>Developed a full-stack portfolio tracker to analyze 100+ investment records, delivering real-time
+                        insights</p>
+                    <ul>
+                        <li>Implemented ML-driven risk scoring to support data-backed financial decisions</li>
+                        <li>Built modular REST APIs enabling scalable, cloud-ready integrations</li>
+                    </ul>
+                    <div class="project-tech">
+                        <span>React</span>
+                        <span>Flask</span>
+                        <span>PostgreSQL</span>
+                    </div>
+                </div>
+
+                <!-- Hostel Management System - Updated with Flip Card -->
+                <div class="project-card flip-card" data-project-link="https://ngp-smart-hostel.vercel.app/">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="project-header">
+                                <h3>Hostel Management System</h3>
+                                <span class="date">2024</span>
+                            </div>
+                            <p>Built a full-stack Hostel Management System with 10+ modules, supporting 300+ users</p>
+                            <ul>
+                                <li>Implemented a responsive UI with dark/light themes and role-based access control
+                                </li>
+                                <li>Integrated MongoDB backend storage with localStorage fallback to improve performance
+                                    during connectivity issues</li>
+                            </ul>
+                            <div class="project-tech">
+                                <span>MongoDB</span>
+                                <span>Node.js</span>
+                                <span>Express.js</span>
+                            </div>
+                            <div class="flip-hint">
+                                <i class="fas fa-eye"></i> Hover to preview | Click to visit
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <div class="project-preview">
+                                <div class="preview-image">
+                                    <img src="hostel.png" alt="Hostel Management System Preview" loading="lazy">
+                                    <div class="image-overlay"></div>
+                                </div>
+                                <div class="preview-content">
+                                    <h3>Live Preview</h3>
+                                    <p>Click to visit the live application</p>
+                                    <div class="preview-tech">
+                                        <span>Full Stack</span>
+                                        <span>MERN</span>
+                                        <span>Responsive</span>
+                                    </div>
+                                    <div class="preview-link">
+                                        <i class="fas fa-external-link-alt"></i> Visit Project
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Smart Shoe For Visually Impaired Individuals -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Smart Shoe For Visually Impaired Individuals</h3>
+                        <span class="date">2024</span>
+                    </div>
+                    <p>Engineered an IoT-based wearable system using Arduino and ultrasonic sensors</p>
+                    <ul>
+                        <li>Achieved 95% obstacle-detection accuracy with optimized buzzer-based alert mechanism</li>
+                        <li>Reduced user reaction time by ~30% with improved device usability through compact,
+                            water-resistant design</li>
+                        <li>Recognized at multiple conferences with 1st Prize, Runner-Up, and Top 6 Finalist at
+                            Vishwakarma Awards, IIT Hyderabad</li>
+                    </ul>
+                    <div class="project-tech">
+                        <span>Arduino</span>
+                        <span>IoT</span>
+                        <span>Embedded Systems</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section - Removed Progress Bars -->
+    <section id="skills" class="section dark-section">
+        <div class="container">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> Languages</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">C</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">JavaScript</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-desktop"></i> Frontend</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">React.js</span>
+                        <span class="skill-tag">HTML</span>
+                        <span class="skill-tag">CSS</span>
+                        <span class="skill-tag">Bootstrap</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-server"></i> Backend</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Express.js</span>
+                        <span class="skill-tag">Flask</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-database"></i> Databases</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">Supabase</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-tools"></i> Tools & Concepts</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">GitHub</span>
+                        <span class="skill-tag">VS Code</span>
+                        <span class="skill-tag">Figma</span>
+                        <span class="skill-tag">Canva</span>
+                        <span class="skill-tag">REST APIs</span>
+                        <span class="skill-tag">Authentication</span>
+                        <span class="skill-tag">Role-Based Access Control</span>
+                        <span class="skill-tag">Agile</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section dark-section">
+        <div class="container">
+            <h2 class="section-title">What People Say</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial active">
+                    <div class="testimonial-content">
+                        <p>"Bharath showed exceptional skills in developing the Hostel Management System. His attention
+                            to detail and problem-solving abilities are remarkable."</p>
+                        <div class="testimonial-author">
+                            <h4>Project Guide</h4>
+                            <p>Dr.N.G.P Institute Of Technology</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"The Smart Shoe project was innovative and well-executed. Bharath's technical expertise in
+                            IoT systems is impressive."</p>
+                        <div class="testimonial-author">
+                            <h4>Conference Judge</h4>
+                            <p>Vishwakarma Awards</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"Great UI/UX design work during the internship. Bharath consistently delivered pixel-perfect
+                            designs and improved user experience significantly."</p>
+                        <div class="testimonial-author">
+                            <h4>Team Lead</h4>
+                            <p>Sri Nandha Infotech</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-controls">
+                    <button class="slider-prev"><i class="fas fa-chevron-left"></i></button>
+                    <div class="slider-dots"></div>
+                    <button class="slider-next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Let's Connect!</h3>
+                    <p>I'm always open to discussing new opportunities, collaborations, or just having a friendly chat
+                        about technology.</p>
+                    <div class="contact-details">
+                        <p><i class="fas fa-phone"></i> +91 9943935576</p>
+                        <p><i class="fas fa-envelope"></i> bharathrajmurali1010@gmail.com</p>
+                        <div class="contact-social">
+                            <a href="https://www.linkedin.com/in/bharath-raj-b-36388932a/" target="_blank"
+                                class="social-icon">
+                                <img src="https://static.vecteezy.com/system/resources/previews/018/930/480/non_2x/linkedin-logo-linkedin-icon-transparent-free-png.png"
+                                    alt="LinkedIn" class="social-logo-img">
+                            </a>
+                            <a href="https://github.com/Bharath-B100" target="_blank" class="social-icon">
+                                <img src="https://images.seeklogo.com/logo-png/30/2/github-logo-png_seeklogo-304612.png"
+                                    alt="GitHub" class="social-logo-img">
+                            </a>
+                            <a href="https://leetcode.com/u/Bharath_Raj_B/" target="_blank" class="social-icon">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png"
+                                    alt="LeetCode" class="social-logo-img">
+                            </a>
+                            <a href="https://www.hackerrank.com/profile/ngtbharath" target="_blank" class="social-icon">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/HackerRank_logo.png"
+                                    alt="HackerRank" class="social-logo-img">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h3>Send Me a Message</h3>
+                    <form id="contactForm" action="https://formspree.io/f/mzznjkln" method="POST">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" rows="5" placeholder="Your Message"
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="btn primary-btn">Send Message</button>
+                        <div id="formStatus" class="form-status"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>Bharath Raj B</h3>
+                    <p>CSBS Student & Full-Stack Developer</p>
+                    <p>Passionate about creating innovative solutions</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <a href="#home">Home</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-envelope"></i> bharathrajmurali1010@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +91 9943935576</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear">2025</span> Bharath Raj B. All Rights Reserved.</p>
+                <p>Designed and developed with ❤️</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Easter Egg Modal -->
+    <div class="easter-egg" id="easterEgg">
+        <div class="egg-content">
+            <h2>🎉 You found an Easter Egg!</h2>
+            <p>Thanks for exploring my portfolio!</p>
+            <button class="btn" id="closeEgg">Close</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
