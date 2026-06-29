@@ -1633,6 +1633,10 @@ h1, h2, h3, h4, h5 {
 .testimonial-content {
     max-width: 600px;
     margin: 0 auto;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .testimonial-content p {
@@ -1927,6 +1931,7 @@ footer a, footer button, footer .btn {
 .footer-info p {
     margin-bottom: 10px;
     line-height: 1.6;
+    font-size: 14px;
 }
 
 .footer-links {

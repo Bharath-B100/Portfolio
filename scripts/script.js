@@ -176,11 +176,13 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Testimonial Slider
+    const testimonialContainer = document.querySelector('.testimonial-slider');
     const testimonials  = document.querySelectorAll('.testimonial');
     const dotsContainer = document.querySelector('.slider-dots');
     const prevBtn       = document.querySelector('.slider-prev');
     const nextBtn       = document.querySelector('.slider-next');
     let currentTestimonial = 0;
+    let testimonialInterval;
 
     function goToSlide(dir) {
         if (dir === 'next') currentTestimonial = (currentTestimonial + 1) % testimonials.length;
@@ -188,10 +190,10 @@ document.addEventListener('DOMContentLoaded', function () {
         showTestimonial(currentTestimonial);
     }
 
-    if (testimonials.length && dotsContainer && prevBtn && nextBtn) {
+    if (testimonialContainer && testimonials.length && dotsContainer && prevBtn && nextBtn) {
         testimonials.forEach((_, i) => {
             const dot = document.createElement('span');
-            dot.addEventListener('click', () => showTestimonial(i));
+            dot.addEventListener('click', () => { showTestimonial(i); startSlider(); });
             dotsContainer.appendChild(dot);
         });
         function showTestimonial(index) {
@@ -200,9 +202,23 @@ document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.slider-dots span').forEach((d, i) => d.classList.toggle('active', i === index));
             currentTestimonial = index;
         }
-        prevBtn.addEventListener('click', () => goToSlide('prev'));
-        nextBtn.addEventListener('click', () => goToSlide('next'));
-        setInterval(() => goToSlide('next'), 5000);
+        
+        function startSlider() {
+            if (testimonialInterval) clearInterval(testimonialInterval);
+            testimonialInterval = setInterval(() => goToSlide('next'), 5000);
+        }
+        
+        function stopSlider() {
+            clearInterval(testimonialInterval);
+        }
+
+        prevBtn.addEventListener('click', () => { goToSlide('prev'); startSlider(); });
+        nextBtn.addEventListener('click', () => { goToSlide('next'); startSlider(); });
+        
+        testimonialContainer.addEventListener('mouseenter', stopSlider);
+        testimonialContainer.addEventListener('mouseleave', startSlider);
+        
+        startSlider();
         showTestimonial(0);
     }
 
@@ -245,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Particles.js
     if (typeof particlesJS !== 'undefined') {
         particlesJS('particles-js', {
-            particles: { number: { value: 40, density: { enable: true, value_area: 800 } }, color: { value: '#1d1d1f' }, shape: { type: 'circle' }, opacity: { value: 0.2, random: true }, size: { value: 2, random: true }, line_linked: { enable: true, distance: 120, color: '#1d1d1f', opacity: 0.15, width: 1 }, move: { enable: true, speed: 0.8, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false } },
+            particles: { number: { value: 50, density: { enable: true, value_area: 800 } }, color: { value: '#1d1d1f' }, shape: { type: 'circle' }, opacity: { value: 0.45, random: true }, size: { value: 3, random: true }, line_linked: { enable: true, distance: 130, color: '#1d1d1f', opacity: 0.35, width: 1.5 }, move: { enable: true, speed: 1.2, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false } },
             interactivity: { detect_on: 'canvas', events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } } }
         });
     }
