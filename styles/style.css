@@ -1485,9 +1485,23 @@ h1, h2, h3, h4, h5 {
 /* Skills Section - Tags Only */
 .skills-container {
     display: grid;
-    /* Same trick as projects — min(100%, 260px) prevents overflow on narrow screens */
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: clamp(16px, 3vw, 30px);
+}
+
+/* Last skill-category (Tools & Concepts) spans full width so tags fill the space */
+.skill-category:last-child {
+    grid-column: 1 / -1;
+    text-align: center;
+}
+
+.skill-category:last-child h3 {
+    justify-content: center;
+}
+
+.skill-category:last-child .skill-tags {
+    justify-content: center;
+    gap: 14px;
 }
 
 .skill-category {
