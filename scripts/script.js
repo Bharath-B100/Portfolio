@@ -108,12 +108,40 @@ document.addEventListener('DOMContentLoaded', function () {
     // Mobile menu toggle
     const menuToggle = document.getElementById('menuToggle');
     const navMenu    = document.getElementById('navMenu');
-    if (menuToggle) {
-        menuToggle.addEventListener('click', function () {
-            navMenu.classList.toggle('active');
-            menuToggle.innerHTML = navMenu.classList.contains('active')
+
+    function closeMobileMenu() {
+        if (!navMenu) return;
+        navMenu.classList.remove('active');
+        if (menuToggle) {
+            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            menuToggle.setAttribute('aria-expanded', 'false');
+        }
+    }
+
+    if (menuToggle && navMenu) {
+        menuToggle.setAttribute('aria-controls', 'navMenu');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Open navigation menu');
+
+        menuToggle.addEventListener('click', function (e) {
+            e.stopPropagation();
+            const isOpen = navMenu.classList.toggle('active');
+            menuToggle.innerHTML = isOpen
                 ? '<i class="fas fa-times"></i>'
                 : '<i class="fas fa-bars"></i>';
+            menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function (e) {
+            if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                closeMobileMenu();
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeMobileMenu();
         });
     }
 
@@ -224,10 +252,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Close mobile menu on link click
     document.querySelectorAll('.nav-menu a').forEach(link => {
-        link.addEventListener('click', () => {
-            if (navMenu) navMenu.classList.remove('active');
-            if (menuToggle) menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-        });
+        link.addEventListener('click', () => closeMobileMenu());
     });
 
     // Navbar scroll + scroll-spy

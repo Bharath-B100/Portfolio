@@ -65,6 +65,7 @@ html {
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE and Edge */
     cursor: url('../assets/images/cursor.png'), auto !important;
+    overflow-x: hidden; /* Prevent horizontal scroll at any width */
 }
 
 html::-webkit-scrollbar {
@@ -94,6 +95,7 @@ body {
     background-color: var(--bg-light);
     transition: background-color 0.4s ease, color 0.4s ease;
     overflow-x: hidden;
+    max-width: 100vw; /* Belt-and-suspenders overflow guard */
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -127,8 +129,8 @@ h1, h2, h3, h4, h5 {
 
 .section-title {
     text-align: center;
-    margin-bottom: 60px;
-    font-size: 3rem;
+    margin-bottom: clamp(30px, 5vw, 60px);
+    font-size: clamp(1.8rem, 6vw, 3rem);
     font-weight: 800;
     letter-spacing: -0.03em;
     position: relative;
@@ -340,27 +342,30 @@ h1, h2, h3, h4, h5 {
 #navbar {
     position: fixed;
     top: 25px;
-    left: 50%;
-    transform: translateX(-50%);
+    /* Use left+right+margin instead of transform:translateX(-50%).
+       transform creates a new containing block for position:fixed children,
+       making them subject to overflow:hidden — which would clip the dropdown.
+       Without transform, position:fixed children escape overflow clipping. */
+    left: 0;
+    right: 0;
+    margin: 0 auto;
     width: 90%;
     max-width: 1000px;
     z-index: 1000;
-    
-    /* Silver Ring Wrapper Setup */
+
     padding: 3px;
     border-radius: 9999px;
-    overflow: hidden;
+    overflow: hidden; /* Safe now — clips the ring, not the fixed dropdown */
     background: transparent;
-    
-    /* Shadow for the entire floating pill */
-    box-shadow: 
+
+    box-shadow:
         0 15px 35px rgba(0,0,0,0.08),
         0 5px 15px rgba(0,0,0,0.04);
-        
+
     transition: top 0.4s ease, max-width 0.4s ease;
 }
 
-/* The spinning silver background */
+/* Spinning silver ring — clipped to pill by #navbar overflow:hidden */
 #navbar::before {
     content: '';
     position: absolute;
@@ -386,6 +391,7 @@ h1, h2, h3, h4, h5 {
         #ffffff 360deg
     );
     z-index: 0;
+    pointer-events: none;
 }
 
 /* Adjust on scroll */
@@ -394,29 +400,27 @@ h1, h2, h3, h4, h5 {
     max-width: 900px; /* shrinks slightly when scrolled */
 }
 
-/* The inner glass pill */
+/* Inner glass pill */
 #navbar .nav-container {
     position: relative;
-    z-index: 1; /* Sit above the spinning background */
+    z-index: 1;
     width: 100%;
     max-width: none;
     margin: 0;
-    
-    /* Glassmorphism */
+
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.5) 100%);
     backdrop-filter: blur(25px) saturate(120%);
     -webkit-backdrop-filter: blur(25px) saturate(120%);
-    
+
     border-radius: 9999px;
     padding: 12px 40px;
-    
+
     display: flex;
     justify-content: space-between;
     align-items: center;
     transition: padding 0.4s ease;
-    
-    /* Inner 3D edge lighting */
-    box-shadow: 
+
+    box-shadow:
         inset 1px 1px 3px rgba(255, 255, 255, 0.9),
         inset -1px -1px 3px rgba(0, 0, 0, 0.05);
 }
@@ -602,7 +606,8 @@ h1, h2, h3, h4, h5 {
 
 .hero-text h1 {
     font-family: 'Quicksand', sans-serif;
-    font-size: 4.5rem;
+    /* clamp(min, preferred, max) — scales from 2rem on 320px to 4.5rem on desktop */
+    font-size: clamp(2rem, 8vw, 4.5rem);
     font-weight: 800;
     margin-bottom: 15px;
     line-height: 1.1;
@@ -615,7 +620,7 @@ h1, h2, h3, h4, h5 {
 
 
 .hero-text h2 {
-    font-size: 2rem;
+    font-size: clamp(1.1rem, 4vw, 2rem);
     font-weight: 500;
     color: var(--text-muted-light);
     margin-bottom: 25px;
@@ -625,10 +630,10 @@ h1, h2, h3, h4, h5 {
 
 
 .hero-text p {
-    font-size: 1.15rem;
+    font-size: clamp(0.95rem, 2.5vw, 1.15rem);
     color: var(--text-muted-light);
     margin-bottom: 35px;
-    max-width: 550px;
+    max-width: min(550px, 100%);
     line-height: 1.7;
 }
 
@@ -646,7 +651,8 @@ h1, h2, h3, h4, h5 {
 
 .github-stats {
     display: flex;
-    gap: 35px;
+    flex-wrap: wrap; /* Prevents overflow on small screens */
+    gap: clamp(16px, 4vw, 35px);
     margin-top: 35px;
 }
 
@@ -689,8 +695,9 @@ h1, h2, h3, h4, h5 {
 
 .hero-image .image-wrapper {
     position: relative;
-    width: 380px;
-    height: 380px;
+    /* Scales from 200px on smallest mobile to 380px on desktop */
+    width: clamp(200px, 45vw, 380px);
+    height: clamp(200px, 45vw, 380px);
     border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
     overflow: visible;
     margin-bottom: 35px;
@@ -850,7 +857,8 @@ h1, h2, h3, h4, h5 {
 
 .timeline {
     position: relative;
-    padding-left: 110px; /* room for SVG snake on the left */
+    /* Fluid padding: 70px on small screens, 110px on desktop */
+    padding-left: clamp(70px, 15vw, 110px);
     min-height: 300px;
 }
 
@@ -1013,7 +1021,8 @@ h1, h2, h3, h4, h5 {
 
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    /* At 320px each cell is ~90px — too small. Use auto-fit with a min of 80px */
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
     gap: 10px;
 }
 
@@ -1136,8 +1145,13 @@ h1, h2, h3, h4, h5 {
 
 .projects-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-    gap: 40px;
+    /*
+     * min(100%, 480px) prevents the minimum from ever exceeding container width.
+     * On 320px screens: min(100%, 480px) = 100%, so single column.
+     * On 1100px+ screens: fills to 2 columns naturally.
+     */
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 480px), 1fr));
+    gap: clamp(20px, 4vw, 40px);
     position: relative;
     z-index: 2;
 }
@@ -1471,8 +1485,9 @@ h1, h2, h3, h4, h5 {
 /* Skills Section - Tags Only */
 .skills-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
+    /* Same trick as projects — min(100%, 260px) prevents overflow on narrow screens */
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: clamp(16px, 3vw, 30px);
 }
 
 .skill-category {
@@ -2029,14 +2044,12 @@ img {
     content-visibility: auto;
 }
 
-/* Responsive Design */
 /* ============================================================
    RESPONSIVE — Tablet (≤1024px)
    ============================================================ */
 @media (max-width: 1024px) {
     .container { padding: 0 30px; }
 
-    /* Hero */
     .hero-container {
         flex-direction: column;
         text-align: center;
@@ -2045,214 +2058,206 @@ img {
     .hero-text { order: 2; }
     .hero-image { order: 1; margin-top: 0; }
     .hero-btns { justify-content: center; }
-    .hero-text h1 { font-size: 2.8rem; }
-    .hero-text h2 { font-size: 1.4rem; }
-    .hero-text p  { font-size: 1rem; }
+    .github-stats { justify-content: center; }
 
-    /* About */
     .about-container { flex-direction: column; gap: 40px; }
     .about-text, .about-sidebar { width: 100%; max-width: 100%; }
-
-    /* Timeline snake: smaller on tablet */
     .timeline { padding-left: 80px; }
     .snake-svg { width: 70px; }
 
-    /* Projects */
-    .projects-grid { grid-template-columns: repeat(2, 1fr); }
-
-    /* Skills */
-    .skills-grid { grid-template-columns: repeat(2, 1fr); }
-
-    /* Experience */
     .exp-header { flex-wrap: wrap; gap: 8px; }
-
-    /* Coding stats */
-    .coding-stats { flex-wrap: wrap; gap: 16px; }
-
-    /* Contact */
     .contact-container { flex-direction: column; gap: 40px; }
 }
 
 /* ============================================================
-   RESPONSIVE — Mobile Landscape / Small Tablet (≤768px)
+   RESPONSIVE — Tablet Portrait (≤768px)
+   HAMBURGER MENU ACTIVATES HERE
    ============================================================ */
 @media (max-width: 768px) {
 
-    /* Navigation */
+    /* Navbar pill: shrink width on mobile.
+       CRITICAL: overflow must be visible so the dropdown isn't clipped.
+       The spinning ring ::before is hidden on mobile to prevent bleed. */
+    #navbar {
+        top: 16px;
+        width: calc(100% - 32px);
+        overflow: visible;
+    }
+
+    /* Hide the large spinning ring on mobile (it bleeds with overflow:visible).
+       Replace it with a simple static border ring instead. */
+    #navbar::before {
+        display: none;
+    }
+    #navbar .nav-container {
+        padding: 10px 20px;
+        /* Simple silver border replaces the animated ring on mobile */
+        border: 2px solid rgba(160, 160, 165, 0.45);
+        box-shadow:
+            0 8px 24px rgba(0,0,0,0.10),
+            inset 1px 1px 3px rgba(255,255,255,0.9),
+            inset -1px -1px 3px rgba(0,0,0,0.05);
+    }
+
+    /* Hamburger button: show it */
+    .menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 44px;
+        min-height: 44px;
+        position: relative;
+        z-index: 1002;
+        cursor: pointer !important;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+        pointer-events: all;
+    }
+
+    /* Desktop nav links: hidden by default, revealed with .active */
     .nav-menu {
         position: fixed;
-        top: 70px;
-        left: -100%;
+        top: 80px;
+        left: 50%;
+        transform: translateX(-50%) translateX(-120vw);
+        opacity: 0;
         flex-direction: column;
-        background-color: white;
-        width: 100%;
-        text-align: center;
-        transition: left 0.3s ease;
-        box-shadow: 0 10px 27px rgba(0,0,0,0.08);
-        padding: 20px 0;
-        z-index: 999;
+        width: calc(100vw - 40px);
+        max-width: 400px;
+        background: rgba(255, 255, 255, 0.97);
+        backdrop-filter: blur(24px) saturate(120%);
+        -webkit-backdrop-filter: blur(24px) saturate(120%);
+        border-radius: 20px;
+        border: 1px solid rgba(0, 0, 0, 0.07);
+        box-shadow:
+            0 20px 50px rgba(0, 0, 0, 0.14),
+            0 6px 16px rgba(0, 0, 0, 0.08);
+        padding: 16px 0 20px;
+        z-index: 1001;
+        transition:
+            transform 0.38s cubic-bezier(0.25, 1, 0.5, 1),
+            opacity   0.38s cubic-bezier(0.25, 1, 0.5, 1);
     }
-    .dark-mode .nav-menu { background-color: #1d1d1f; }
-    .nav-menu.active { left: 0; }
-    .nav-menu li { margin: 15px 0; }
-    .menu-toggle { display: flex; }
+    .nav-menu.active {
+        transform: translateX(-50%);
+        opacity: 1;
+    }
+    .nav-menu li { margin: 2px 0; }
+    .nav-menu a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 24px;
+        font-size: 1.05rem;
+        min-height: 44px;
+    }
 
     /* Sections */
     .section { padding: 60px 0; }
-    .section-title { font-size: 2rem; }
-    .hero { padding: 120px 0 80px; }
+    .hero { padding: 110px 0 70px; }
 
-    /* Hero */
-    .hero-text h1 { font-size: 2.2rem; }
-    .hero-text h2 { font-size: 1.2rem; }
-    .image-wrapper { width: 260px; height: 260px; }
+    /* Projects: single column */
+    .projects-container { grid-template-columns: 1fr; gap: 24px; }
+    .project-card { padding: 24px; }
 
-    /* About / Timeline */
+    /* Skills: 2 columns */
+    .skills-container { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+
+    /* Timeline */
     .timeline { padding-left: 70px; min-height: 250px; }
-    .snake-svg { width: 60px; }
-    .timeline-item { margin-bottom: 30px; }
-
-    /* Certifications */
-    .about-text .certifications { margin-top: 30px; }
-
-    /* Projects */
-    .projects-grid { grid-template-columns: 1fr; }
-    .project-card { padding: 22px; }
-
-    /* Skills */
-    .skills-grid { grid-template-columns: repeat(2, 1fr); }
-
-    /* Coding stats */
-    .coding-stats { flex-direction: column; align-items: center; gap: 16px; }
-    .stat-card { width: 100%; max-width: 280px; }
-
-    /* Social links */
-    .social-links { flex-direction: column; align-items: flex-start; gap: 10px; }
-    .social-links a { width: 100%; }
+    .snake-svg { width: 58px; }
+    .timeline-item { margin-bottom: 28px; }
 
     /* Experience */
-    .exp-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
-    }
+    .exp-header { flex-direction: column; align-items: flex-start; gap: 6px; }
     .exp-header .date { align-self: flex-start; }
 
     /* Contact */
     .contact-container { flex-direction: column; gap: 30px; }
-    .contact-info, .contact-form-section { width: 100%; }
 
     /* Footer */
     .footer-content { grid-template-columns: 1fr; text-align: center; gap: 30px; }
     .footer-contact p { justify-content: center; }
     .footer-links { align-items: center; }
 
-    /* Achievement Badges */
+    /* Badges */
     .achievement-badges { gap: 12px; }
     .badge { width: 42px; height: 42px; font-size: 1.1rem; }
 
-    /* Mobile — use native cursor */
+    /* Social links */
+    .social-links { flex-direction: column; align-items: flex-start; gap: 10px; }
+
+    /* Disable custom cursor on mobile */
     #cursor, #cursor-follower { display: none !important; }
-
-    /* Menu toggle always on top and clickable */
-    .menu-toggle {
-        position: relative;
-        z-index: 1001;
-        cursor: pointer !important;
-        -webkit-tap-highlight-color: transparent;
-    }
-
-    /* Mobile nav menu z-index and dark-mode support */
-    .nav-menu {
-        z-index: 1000;
-    }
 }
 
 /* ============================================================
    RESPONSIVE — Mobile Portrait (≤576px)
    ============================================================ */
 @media (max-width: 576px) {
-    .container { padding: 0 18px; }
+    .container { padding: 0 16px; }
 
-    /* Hero */
     .hero { padding: 100px 0 60px; }
-    .hero-text h1 { font-size: 2rem; }
-    .hero-text h2 { font-size: 1.1rem; }
-    .hero-text p { font-size: 0.95rem; }
-    .hero-btns { flex-direction: column; align-items: center; gap: 14px; }
-    .btn { width: 100%; max-width: 260px; text-align: center; justify-content: center; }
-    .image-wrapper { width: 230px; height: 230px; }
+    .hero-btns { flex-direction: column; align-items: center; gap: 14px; width: 100%; }
+    .hero-btns .btn-track,
+    .resume-download .btn-track { width: 100%; max-width: 280px; }
+    .hero-btns .btn,
+    .resume-download .btn { width: 100%; justify-content: center; }
+    .github-stats { justify-content: center; gap: 16px; }
 
-    /* About / Timeline */
+    .skills-container { grid-template-columns: 1fr; }
+    .skill-category { padding: 20px; }
+    .skill-tag { font-size: 0.85rem; padding: 7px 14px; }
+
+    .project-card { padding: 20px; }
+    .project-header h3 { font-size: 1.2rem; }
+
     .timeline { padding-left: 55px; }
-    .snake-svg { width: 48px; }
-    .timeline-date { font-size: 0.85rem; }
-    .timeline-content h5 { font-size: 0.95rem; }
-    .timeline-content p  { font-size: 0.85rem; }
+    .snake-svg { width: 46px; }
 
-    /* Skills */
-    .skills-grid { grid-template-columns: 1fr; }
-    .skill-tag { font-size: 0.8rem; padding: 6px 12px; }
+    .experience-card { padding: 22px; }
+    .exp-header h3 { font-size: 1.1rem; }
 
-    /* Projects */
-    .project-card, .experience-card { padding: 18px; }
-    .project-card h3 { font-size: 1.1rem; }
-    .project-card p  { font-size: 0.9rem; }
+    .testimonial { padding: 30px 20px; }
+    .testimonial-content p { font-size: 1.05rem; }
 
-    /* Experience */
-    .exp-header h3 { font-size: 1rem; }
-    .exp-header .company { font-size: 0.9rem; }
+    /* CRITICAL: 16px minimum prevents iOS Safari auto-zoom on focus */
+    .form-group input,
+    .form-group textarea { font-size: 16px; padding: 14px 16px; }
 
-    /* Certifications */
-    .about-text .certifications li { font-size: 0.9rem; }
-
-    /* Coding stats */
-    .stat-card h6 { font-size: 1.6rem; }
-
-    /* Footer */
     .footer-content { gap: 24px; }
-    .footer-info h3 { font-size: 1.2rem; }
-
-    /* Section title */
-    .section-title { font-size: 1.7rem; }
-
-    /* Achievement badges */
     .achievement-badges { gap: 10px; }
     .badge { width: 38px; height: 38px; font-size: 1rem; }
 
-    /* Case study pages */
-    .case-study-title { font-size: 2.2rem !important; }
+    .case-study-title { font-size: 2rem !important; }
     .case-section { padding: 40px 0 !important; }
-    .case-section h3 { font-size: 1.4rem !important; }
-    .case-section p { font-size: 0.95rem !important; }
-    .case-wireframe { height: 220px !important; }
-    .hero-btns { flex-wrap: wrap; }
-
-    /* Metrics grid in case studies */
     .case-metrics { grid-template-columns: 1fr !important; gap: 12px !important; }
 }
 
 /* ============================================================
    RESPONSIVE — Small Mobile (≤480px)
+   iPhone SE (2/3rd gen), Samsung Galaxy A series
    ============================================================ */
 @media (max-width: 480px) {
-    .container { padding: 0 15px; }
+    .container { padding: 0 14px; }
 
-    .hero-text h1 { font-size: 1.75rem; }
-    .hero-text h2 { font-size: 1rem; }
-    .section-title { font-size: 1.5rem; }
-    .image-wrapper { width: 200px; height: 200px; }
+    #navbar { top: 12px; width: calc(100% - 24px); }
+    #navbar .nav-container { padding: 8px 16px; }
+    .nav-menu { top: 74px; }
+    .logo { font-size: 1.25rem; }
 
-    /* Timeline — hide snake, show plain markers */
-    .timeline { padding-left: 30px; }
+    .hero { padding: 88px 0 50px; }
+
+    /* Timeline: replace snake with simple dot markers */
+    .timeline { padding-left: 28px; }
     .snake-svg { display: none; }
-    .timeline-item { opacity: 1 !important; transform: none !important; }
+    .timeline-item { opacity: 1 !important; transform: none !important; padding-left: 16px; }
     .timeline-item::before {
         display: block !important;
         content: '';
         position: absolute;
-        left: -22px;
-        top: 5px;
+        left: -5px;
+        top: 6px;
         width: 10px;
         height: 10px;
         border-radius: 50%;
@@ -2262,50 +2267,58 @@ img {
     .timeline::after {
         content: '';
         position: absolute;
-        left: 0;
+        left: 4px;
         top: 0;
         bottom: 0;
         width: 2px;
         background: linear-gradient(to bottom, #b0b0b0, #c8c8c8);
     }
 
-    .badge { width: 34px; height: 34px; font-size: 0.8rem; }
+    /* Stats: 2 columns */
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+
     .btn { padding: 12px 20px; font-size: 0.9rem; }
-
-    /* Contact form */
-    .quick-form { width: 280px; }
-    .floating-contact { bottom: 15px; right: 15px; }
-
-    /* Chat window */
-    .chat-window {
-        width: 95%; height: 70vh;
-        bottom: 10px; right: 10px; left: 10px;
-    }
+    .badge { width: 34px; height: 34px; font-size: 0.85rem; }
+    .skill-tag { font-size: 0.8rem; padding: 6px 12px; }
 }
 
 /* ============================================================
    RESPONSIVE — Extra Small (≤375px)
+   iPhone SE gen 1 (375px), Samsung Galaxy S8 (360px)
    ============================================================ */
 @media (max-width: 375px) {
     .container { padding: 0 12px; }
-    .hero-text h1 { font-size: 1.6rem; }
-    .section-title { font-size: 1.35rem; }
-    .image-wrapper { width: 180px; height: 180px; }
-    .btn { padding: 10px 16px; font-size: 0.85rem; }
-    .exp-header h3 { font-size: 0.9rem; }
-    .case-study-title { font-size: 1.8rem !important; }
+    #navbar { width: calc(100% - 20px); }
+    .logo { font-size: 1.1rem; }
+    .nav-menu { top: 72px; width: calc(100vw - 24px); }
+
+    /* Stats: single column at absolute minimum */
+    .stats-grid { grid-template-columns: 1fr; }
+
+    .btn { padding: 11px 18px; font-size: 0.875rem; }
+    .badge { width: 32px; height: 32px; font-size: 0.8rem; }
 }
 
 /* ============================================================
    RESPONSIVE — Landscape Mobile
+   Phones rotated sideways (any phone ≤768px wide in landscape)
    ============================================================ */
 @media (max-width: 768px) and (orientation: landscape) {
-    .hero { padding: 60px 0 40px; }
-    .hero-container { flex-direction: row; align-items: center; }
-    .hero-text { order: 1; text-align: left; }
-    .hero-image { order: 2; }
+    .hero { padding: 70px 0 40px; }
+    .hero-container {
+        flex-direction: row;
+        align-items: center;
+        text-align: left;
+        gap: 30px;
+    }
+    .hero-text { order: 1; }
+    .hero-image { order: 2; flex: 0 0 auto; }
     .hero-btns { justify-content: flex-start; }
-    .image-wrapper { width: 180px; height: 180px; }
+    .github-stats { justify-content: flex-start; }
+    .hero-image .image-wrapper {
+        width: clamp(130px, 28vh, 220px);
+        height: clamp(130px, 28vh, 220px);
+    }
 }
 
 /* ============================================================
@@ -2314,6 +2327,7 @@ img {
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     .hero-image img { image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; }
 }
+
 
 /* Add this to your CSS file */
 
