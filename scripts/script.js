@@ -353,6 +353,21 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     })();
 
+    // =========================================================
+    // COLORFUL THEME TOGGLE
+    // =========================================================
+    const paintBtn = document.querySelector('.slogan-paint-btn');
+    if (paintBtn) {
+        paintBtn.addEventListener('click', function() {
+            document.body.classList.toggle('colorful-mode');
+            if (document.body.classList.contains('colorful-mode')) {
+                paintBtn.textContent = 'clear';
+            } else {
+                paintBtn.textContent = 'paint';
+            }
+        });
+    }
+
 }); // End DOMContentLoaded
 
 // ============================================================

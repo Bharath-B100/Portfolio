@@ -130,11 +130,10 @@
             <div class="about-container">
                 <div class="about-text">
                     <h3>Enthusiastic CSBS Student</h3>
-                    <p>Skilled in machine learning, data analytics, and full-stack development, with hands-on experience
-                        building real-time IoT and AI-driven systems. Strong at problem-solving, writing clean
-                        production-ready code, and working in fast-paced, collaborative environments.</p>
+                    <p>Aspiring Full-Stack Developer seeking to apply strong technical skills in programming, system design, and problem-solving within a dynamic, growth-oriented environment. Committed to continuous learning, rapid adaptation to emerging technologies, and building clean, production-ready solutions that create real-world impact and drive meaningful progress.</p>
 
                     <!-- Interactive Timeline with SVG Snake -->
+                     
                     <div class="timeline-section" id="journey-section">
                         <h4>My Journey</h4>
                         <div class="timeline" id="snake-timeline">
@@ -518,36 +517,39 @@
         <div class="container">
             <h2 class="section-title">What People Say</h2>
             <div class="testimonial-slider">
-                <div class="testimonial active">
-                    <div class="testimonial-content">
-                        <p>"Bharath showed exceptional skills in developing the Hostel Management System. His attention
-                            to detail and problem-solving abilities are remarkable."</p>
-                        <div class="testimonial-author">
-                            <h4>Project Guide</h4>
-                            <p>Dr.N.G.P Institute Of Technology</p>
+                <!-- Fixed-height track: all 3 cards stack here, no layout shift -->
+                <div class="testimonial-track">
+                    <div class="testimonial active">
+                        <div class="testimonial-content">
+                            <p>"Bharath showed exceptional skills in developing the Hostel Management System. His attention
+                                to detail and problem-solving abilities are remarkable."</p>
+                            <div class="testimonial-author">
+                                <h4>Project Guide</h4>
+                                <p>Dr.N.G.P Institute Of Technology</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="testimonial">
-                    <div class="testimonial-content">
-                        <p>"The Smart Shoe project was innovative and well-executed. Bharath's technical expertise in
-                            IoT systems is impressive."</p>
-                        <div class="testimonial-author">
-                            <h4>Conference Judge</h4>
-                            <p>Vishwakarma Awards</p>
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p>"The Smart Shoe project was innovative and well-executed. Bharath's technical expertise in
+                                IoT systems is impressive."</p>
+                            <div class="testimonial-author">
+                                <h4>Conference Judge</h4>
+                                <p>Vishwakarma Awards</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="testimonial">
-                    <div class="testimonial-content">
-                        <p>"Great UI/UX design work during the internship. Bharath consistently delivered pixel-perfect
-                            designs and improved user experience significantly."</p>
-                        <div class="testimonial-author">
-                            <h4>Team Lead</h4>
-                            <p>Sri Nandha Infotech</p>
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p>"Great UI/UX design work during the internship. Bharath consistently delivered pixel-perfect
+                                designs and improved user experience significantly."</p>
+                            <div class="testimonial-author">
+                                <h4>Team Lead</h4>
+                                <p>Sri Nandha Infotech</p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </div><!-- /.testimonial-track -->
                 <div class="slider-controls">
                     <button class="slider-prev"><i class="fas fa-chevron-left"></i></button>
                     <div class="slider-dots"></div>
@@ -616,39 +618,125 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
+    <!-- Pre-Footer Slogan -->
+    <div class="pre-footer-slogan">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-info">
-                    <h3>Bharath Raj B</h3>
-                    <p>Computer Science and Business Systems</p>
-                    <p>Full-Stack Developer</p>
-                    <p>Passionate about creating innovative solutions</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Quick Links</h4>
-                    <a href="#home">Home</a>
-                    <a href="#projects">Projects</a>
-                    <a href="#skills">Skills</a>
-                    <a href="#contact">Contact</a>
-                </div>
-                <div class="footer-links">
-                    <h4>Live Project Links</h4>
-                    <a href="https://tinyurl.com/SMART-HOSTEL">Smart Hostel</a>
-                    <a href="https://traveloop-mtz2.onrender.com/">Traveloop</a>
-                    <a href="https://dyd-cloths.onrender.com" target="_blank">DYD-Cloths</a>
-                </div>
-                <div class="footer-contact">
-                    <h4>Contact</h4>
-                    <p><i class="fas fa-envelope"></i> bharathrajmurali1010@gmail.com</p>
-                    <p><i class="fas fa-phone"></i> +91 9943935576</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; <span id="currentYear">2026</span> Bharath Raj B. All Rights Reserved.</p>
-            </div>
+            <p>Life is in black and white. It's up to you to <button class="slogan-paint-btn">paint</button> the colours</p>
         </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="site-footer">
+        <!-- Animated background grid -->
+        <div class="footer-bg-grid" aria-hidden="true"></div>
+
+        <div class="container footer-inner">
+
+            <!-- TOP ROW: 4 columns -->
+            <div class="footer-grid">
+
+                <!-- Col 1: About -->
+                <div class="footer-col footer-brand">
+                    <a href="#home" class="footer-logo" aria-label="Back to top">
+                        Bharath <span>Raj B</span>
+                    </a>
+                    <p class="footer-tagline">CSBS Student &amp; Full-Stack Developer</p>
+                    <p class="footer-bio">Building scalable, cloud-ready applications with clean code and a passion for innovation.</p>
+                    <!-- Social Icons -->
+                    <div class="footer-socials" role="list">
+                        <a href="https://github.com/Bharath-B100" target="_blank" rel="noopener noreferrer"
+                           class="footer-social-icon" aria-label="GitHub" role="listitem">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/bharath-raj143/" target="_blank" rel="noopener noreferrer"
+                           class="footer-social-icon" aria-label="LinkedIn" role="listitem">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="mailto:bharathrajmurali1010@gmail.com"
+                           class="footer-social-icon" aria-label="Email" role="listitem">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://leetcode.com/u/Bharath_Raj_B/" target="_blank" rel="noopener noreferrer"
+                           class="footer-social-icon" aria-label="LeetCode" role="listitem">
+                            <i class="fas fa-code"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Quick Links -->
+                <nav class="footer-col footer-nav" aria-label="Quick links">
+                    <h4 class="footer-col-title">Quick Links</h4>
+                    <ul class="footer-link-list">
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i>Home</a></li>
+                        <li><a href="#about"><i class="fas fa-chevron-right"></i>About</a></li>
+                        <li><a href="#experience"><i class="fas fa-chevron-right"></i>Experience</a></li>
+                        <li><a href="#projects"><i class="fas fa-chevron-right"></i>Projects</a></li>
+                        <li><a href="#skills"><i class="fas fa-chevron-right"></i>Skills</a></li>
+                        <li><a href="#contact"><i class="fas fa-chevron-right"></i>Contact</a></li>
+                        <li><a href="certifications.html"><i class="fas fa-chevron-right"></i>Certifications</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Col 3: Live Projects -->
+                <nav class="footer-col footer-projects" aria-label="Live projects">
+                    <h4 class="footer-col-title">Live Projects</h4>
+                    <ul class="footer-link-list">
+                        <li>
+                            <a href="https://tinyurl.com/SMART-HOSTEL" target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-external-link-alt"></i>Smart Hostel
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://traveloop-mtz2.onrender.com/" target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-external-link-alt"></i>Traveloop
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://dyd-cloths.onrender.com" target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-external-link-alt"></i>DYD-Cloths
+                            </a>
+                        </li>
+                        <li>
+                            <a href="case-studies/smart-spending.html">
+                                <i class="fas fa-external-link-alt"></i>Smart Spending
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- Col 4: Contact -->
+                <div class="footer-col footer-contact-col">
+                    <h4 class="footer-col-title">Get In Touch</h4>
+                    <ul class="footer-contact-list">
+                        <li>
+                            <a href="mailto:bharathrajmurali1010@gmail.com" class="footer-contact-item">
+                                <span class="footer-contact-icon"><i class="fas fa-envelope"></i></span>
+                                <span>bharathrajmurali1010@gmail.com</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="tel:+919943935576" class="footer-contact-item">
+                                <span class="footer-contact-icon"><i class="fas fa-phone"></i></span>
+                                <span>+91 99439 35576</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/bharath-raj143/" target="_blank" rel="noopener noreferrer" class="footer-contact-item">
+                                <span class="footer-contact-icon"><i class="fab fa-linkedin-in"></i></span>
+                                <span>bharath-raj143</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div><!-- /.footer-grid -->
+
+            <!-- BOTTOM BAR -->
+            <div class="footer-bottom-bar">
+                <p class="footer-copy">&copy; <span id="currentYear">2026</span> Bharath Raj B. All rights reserved.</p>
+            </div>
+
+        </div><!-- /.footer-inner -->
     </footer>
 
 
