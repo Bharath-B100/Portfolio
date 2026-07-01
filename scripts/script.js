@@ -191,6 +191,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     if (testimonialContainer && testimonials.length && dotsContainer && prevBtn && nextBtn) {
+        let isHovered = false;
+
         testimonials.forEach((_, i) => {
             const dot = document.createElement('span');
             dot.addEventListener('click', () => { showTestimonial(i); startSlider(); });
@@ -205,7 +207,9 @@ document.addEventListener('DOMContentLoaded', function () {
         
         function startSlider() {
             if (testimonialInterval) clearInterval(testimonialInterval);
-            testimonialInterval = setInterval(() => goToSlide('next'), 5000);
+            if (!isHovered) {
+                testimonialInterval = setInterval(() => goToSlide('next'), 5000);
+            }
         }
         
         function stopSlider() {
@@ -215,8 +219,14 @@ document.addEventListener('DOMContentLoaded', function () {
         prevBtn.addEventListener('click', () => { goToSlide('prev'); startSlider(); });
         nextBtn.addEventListener('click', () => { goToSlide('next'); startSlider(); });
         
-        testimonialContainer.addEventListener('mouseenter', stopSlider);
-        testimonialContainer.addEventListener('mouseleave', startSlider);
+        testimonialContainer.addEventListener('mouseenter', () => {
+            isHovered = true;
+            stopSlider();
+        });
+        testimonialContainer.addEventListener('mouseleave', () => {
+            isHovered = false;
+            startSlider();
+        });
         
         startSlider();
         showTestimonial(0);
@@ -404,6 +414,15 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(function () {
             window.location.href = href;
         }, 380);
+    });
+
+    // Handle BFCache (Back-Forward Cache) restoration (e.g., trackpad swipe back)
+    window.addEventListener('pageshow', function (e) {
+        if (e.persisted) {
+            overlay.classList.remove('is-leaving');
+            // Re-trigger enter animation to ensure a smooth reveal if needed
+            overlay.classList.add('is-entering');
+        }
     });
 });
 
