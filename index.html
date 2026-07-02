@@ -245,8 +245,8 @@
                                 LeetCode Contest Rating: 1462 | 500+ Problems Solved
                             </li>
                             <li>
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/HackerRank_logo.png"
-                                    alt="HackerRank" class="achievement-icon" style="filter: grayscale(100%) brightness(0);" loading="lazy">
+                                <img src="assets/images/hackerrank-bw-logo.png"
+                                    alt="HackerRank" class="achievement-icon" loading="lazy">
                                 HackerRank: 100+ Problems Solved | 3+ Certificates
                             </li>
                             <li>Vishwakarma Awards 2024: Top 6 Finalist among 3000+ teams</li>
@@ -446,67 +446,70 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="section dark-section">
-        <div class="container">
+    <section id="skills" class="section dark-section" style="position: relative; overflow: hidden; min-height: 80vh; display: flex; align-items: center;">
+        <canvas id="particleCanvas"></canvas>
+        <div class="container" style="position: relative; z-index: 2; width: 100%;">
             <h2 class="section-title">Skills</h2>
-            <div class="skills-container">
-                <div class="skill-category">
-                    <h3><i class="fas fa-code"></i> Languages</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">C</span>
-                        <span class="skill-tag">Java</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">Python</span>
+            
+            <div class="tree-wrapper">
+                <div class="tree-shake-wrapper" style="position: relative; width: 100%; height: 100%;">
+                    <img src="assets/images/skill-tree-exact.png" alt="Skill Tree" class="skill-tree-img">
+                    
+                    <!-- Main Category Buttons -->
+                    <div class="icon-container hotspot liquid-btn" style="left: 35%; top: 22%;" data-category="design" onclick="toggleSkills('design')">
+                        <i class="fas fa-tools"></i>
                     </div>
-                </div>
+                    <div class="icon-container hotspot liquid-btn" style="left: 28%; top: 36%;" data-category="languages" onclick="toggleSkills('languages')">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="icon-container hotspot liquid-btn" style="left: 35%; top: 48%;" data-category="frontend" onclick="toggleSkills('frontend')">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <div class="icon-container hotspot liquid-btn" style="left: 65%; top: 22%;" data-category="architecture" onclick="toggleSkills('architecture')">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="icon-container hotspot liquid-btn" style="left: 72%; top: 36%;" data-category="backend" onclick="toggleSkills('backend')">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="icon-container hotspot liquid-btn" style="left: 65%; top: 48%;" data-category="databases" onclick="toggleSkills('databases')">
+                        <i class="fas fa-database"></i>
+                    </div>
 
-                <div class="skill-category">
-                    <h3><i class="fas fa-desktop"></i> Frontend</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Bootstrap</span>
-                        <span class="skill-tag">CSS</span>
-                        <span class="skill-tag">HTML</span>
-                        <span class="skill-tag">React.js</span>
-                    </div>
-                </div>
+                    <!-- Individual Skill Nodes (Hidden by default) -->
+                    <!-- Design & DevOps -->
+                    <div class="skill-node design" style="left: 20%; top: 5%; --delay: 1;">Git</div>
+                    <div class="skill-node design" style="left: 32%; top: 2%; --delay: 2;">GitHub</div>
+                    <div class="skill-node design" style="left: 45%; top: 6%; --delay: 3;">Figma</div>
+                    <div class="skill-node design" style="left: 14%; top: 15%; --delay: 4;">Canva</div>
+                    <div class="skill-node design" style="left: 23%; top: 12%; --delay: 5;">Agile</div>
 
-                <div class="skill-category">
-                    <h3><i class="fas fa-server"></i> Backend</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Express.js</span>
-                        <span class="skill-tag">Flask</span>
-                        <span class="skill-tag">Node.js</span>
-                    </div>
-                </div>
+                    <!-- Languages -->
+                    <div class="skill-node languages" style="left: 10%; top: 25%; --delay: 1;">C</div>
+                    <div class="skill-node languages" style="left: 20%; top: 22%; --delay: 2;">Java</div>
+                    <div class="skill-node languages" style="left: 4%; top: 35%; --delay: 3;">JavaScript</div>
+                    <div class="skill-node languages" style="left: 14%; top: 38%; --delay: 4;">Python</div>
 
-                <div class="skill-category">
-                    <h3><i class="fas fa-database"></i> Databases</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">MongoDB</span>
-                        <span class="skill-tag">MySQL</span>
-                        <span class="skill-tag">PostgreSQL</span>
-                        <span class="skill-tag">Supabase</span>
-                    </div>
-                </div>
+                    <!-- Frontend -->
+                    <div class="skill-node frontend" style="left: 6%; top: 47%; --delay: 1;">Bootstrap</div>
+                    <div class="skill-node frontend" style="left: 16%; top: 51%; --delay: 2;">CSS</div>
+                    <div class="skill-node frontend" style="left: 9%; top: 60%; --delay: 3;">HTML</div>
+                    <div class="skill-node frontend" style="left: 22%; top: 59%; --delay: 4;">React.js</div>
 
-                <div class="skill-category full-width">
-                    <h3><i class="fas fa-paint-brush"></i> Design & DevOps</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">GitHub</span>
-                        <span class="skill-tag">Figma</span>
-                        <span class="skill-tag">Canva</span>
-                        <span class="skill-tag">Agile Methodologies</span>
-                    </div>
-                </div>
+                    <!-- Architecture & Security -->
+                    <div class="skill-node architecture" style="left: 55%; top: 2%; --delay: 1;">REST API</div>
+                    <div class="skill-node architecture" style="left: 68%; top: 5%; --delay: 2;">RBAC</div>
+                    <div class="skill-node architecture" style="left: 82%; top: 12%; --delay: 3;">JWT</div>
 
-                <div class="skill-category full-width">
-                    <h3><i class="fas fa-shield-alt"></i> Architecture & Security</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">RESTful API Design</span>
-                        <span class="skill-tag">Role-Based Access Control (RBAC)</span>
-                        <span class="skill-tag">JWT Authentication</span>
-                    </div>
+                    <!-- Backend -->
+                    <div class="skill-node backend" style="left: 80%; top: 26%; --delay: 1;">Express.js</div>
+                    <div class="skill-node backend" style="left: 92%; top: 34%; --delay: 2;">Flask</div>
+                    <div class="skill-node backend" style="left: 83%; top: 45%; --delay: 3;">Node.js</div>
+
+                    <!-- Databases -->
+                    <div class="skill-node databases" style="left: 78%; top: 48%; --delay: 1;">MongoDB</div>
+                    <div class="skill-node databases" style="left: 90%; top: 48%; --delay: 2;">MySQL</div>
+                    <div class="skill-node databases" style="left: 79%; top: 58%; --delay: 3;">PostgreSQL</div>
+                    <div class="skill-node databases" style="left: 92%; top: 58%; --delay: 4;">Supabase</div>
                 </div>
             </div>
         </div>
@@ -586,8 +589,8 @@
                                     alt="LeetCode" class="social-logo-img" loading="lazy">
                             </a>
                             <a href="https://www.hackerrank.com/profile/ngtbharath" target="_blank" class="social-icon">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/HackerRank_logo.png"
-                                    alt="HackerRank" class="social-logo-img" loading="lazy">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/4/40/HackerRank_Icon-1000px.png"
+                                    alt="HackerRank" class="social-logo-img" style="filter: grayscale(100%);" loading="lazy">
                             </a>
                         </div>
                     </div>

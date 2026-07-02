@@ -255,7 +255,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // Particles.js
-    if (typeof particlesJS !== 'undefined') {
+    const particlesContainer = document.getElementById('particles-js');
+    if (typeof particlesJS !== 'undefined' && particlesContainer) {
         particlesJS('particles-js', {
             particles: { number: { value: 50, density: { enable: true, value_area: 800 } }, color: { value: '#1d1d1f' }, shape: { type: 'circle' }, opacity: { value: 0.45, random: true }, size: { value: 3, random: true }, line_linked: { enable: true, distance: 130, color: '#1d1d1f', opacity: 0.35, width: 1.5 }, move: { enable: true, speed: 1.2, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false } },
             interactivity: { detect_on: 'canvas', events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } } }
@@ -493,4 +494,133 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll(); // run once on load in case section already visible
 })();
+
+
+
+    // =========================================================
+    // SKILL TREE PARTICLE BACKGROUND
+    // =========================================================
+    const canvas = document.getElementById("particleCanvas");
+    if (canvas) {
+        const ctx = canvas.getContext("2d");
+        let width, height;
+        let particles = [];
+
+        function resizeCanvas() {
+            const section = document.getElementById("skills");
+            if(section) {
+                width = canvas.width = section.clientWidth;
+                height = canvas.height = section.clientHeight;
+            }
+        }
+
+        window.addEventListener("resize", resizeCanvas);
+        setTimeout(resizeCanvas, 100);
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * (width || window.innerWidth);
+                this.y = Math.random() * (height || window.innerHeight);
+                this.size = Math.random() * 2;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+                this.color = `rgba(255, 255, 255, ${Math.random() * 0.3})`;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > width) this.x = 0;
+                if (this.x < 0) this.x = width;
+                if (this.y > height) this.y = 0;
+                if (this.y < 0) this.y = height;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            let particleCount = Math.floor((width * height) / 10000);
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, width, height);
+            
+            // If in colorful mode, maybe tint particles slightly? Let us stick to white for now.
+            for (let particle of particles) {
+                particle.update();
+                particle.draw();
+            }
+            requestAnimationFrame(animateCanvas);
+        }
+
+        setTimeout(() => {
+            resizeCanvas();
+            initParticles();
+            animateCanvas();
+        }, 500);
+    }
+
+
+
+    // =========================================================
+    // SKILL TREE INTERACTIVE NODES
+    // =========================================================
+    window.toggleSkills = function(category) {
+        const hotspots = document.querySelectorAll(".icon-container.hotspot");
+        const allSkillNodes = document.querySelectorAll(".skill-node");
+
+        const clickedHotspot = document.querySelector(`.icon-container.hotspot[data-category="${category}"]`);
+        if (!clickedHotspot) return;
+        
+        const isActive = clickedHotspot.classList.contains("active");
+
+        // Close all
+        hotspots.forEach(h => h.classList.remove("active"));
+        allSkillNodes.forEach(node => node.classList.remove("active"));
+
+        // Open clicked
+        if (!isActive) {
+            clickedHotspot.classList.add("active");
+            const targetNodes = document.querySelectorAll(`.skill-node.${category}`);
+            targetNodes.forEach(node => node.classList.add("active"));
+        }
+    };
+
+    // =========================================================
+    // ANTI-INSPECT / SOURCE PROTECTION
+    // =========================================================
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+    
+    document.addEventListener('keydown', function(e) {
+        // Prevent F12
+        if (e.key === 'F12' || e.keyCode === 123) {
+            e.preventDefault();
+        }
+        // Prevent Ctrl+Shift+I (Windows) / Cmd+Opt+I (Mac)
+        if ((e.ctrlKey && e.shiftKey && e.key === 'I') || (e.metaKey && e.altKey && e.key === 'i')) {
+            e.preventDefault();
+        }
+        // Prevent Ctrl+Shift+J (Windows) / Cmd+Opt+J (Mac)
+        if ((e.ctrlKey && e.shiftKey && e.key === 'J') || (e.metaKey && e.altKey && e.key === 'j')) {
+            e.preventDefault();
+        }
+        // Prevent Ctrl+U (Windows) / Cmd+U (Mac) - View Source
+        if ((e.ctrlKey && e.key === 'u') || (e.ctrlKey && e.key === 'U') || (e.metaKey && e.key === 'u')) {
+            e.preventDefault();
+        }
+        // Prevent Ctrl+Shift+C (Windows) / Cmd+Opt+C (Mac)
+        if ((e.ctrlKey && e.shiftKey && e.key === 'C') || (e.metaKey && e.altKey && e.key === 'c')) {
+            e.preventDefault();
+        }
+    });
 
