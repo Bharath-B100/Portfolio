@@ -69,10 +69,10 @@
                     <a href="#contact" class="btn-track"><span class="btn secondary-btn">Contact Me</span></a>
                 </div>
 
-                <!-- Download Resume Button -->
+                <!-- View Resume Button -->
                 <div class="resume-download">
-                    <a href="assets/docs/Resume.pdf" download class="btn-track" id="downloadResume">
-                        <span class="btn download-btn"><i class="fas fa-download"></i> Download Resume</span>
+                    <a href="javascript:void(0)" class="btn-track" id="viewResumeBtn">
+                        <span class="btn download-btn"><i class="fas fa-eye"></i> View Resume</span>
                     </a>
                 </div>
 
@@ -742,6 +742,18 @@
         </div><!-- /.footer-inner -->
     </footer>
 
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" id="lightbox-close">&times;</span>
+        <a href="assets/docs/Resume.pdf" download class="btn lightbox-download-btn" id="lightbox-download" style="display: none;">
+            <i class="fas fa-download"></i> Download Resume
+        </a>
+        <div class="lightbox-scroll-container" id="lightbox-scroll-container">
+            <img src="" alt="Resume Page 1" class="lightbox-content" id="lightbox-img">
+            <img src="" alt="Resume Page 2" class="lightbox-content" id="lightbox-img-2" style="display: none;">
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
