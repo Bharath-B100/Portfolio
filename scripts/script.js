@@ -8,57 +8,43 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-    // 7. ODOMETER / SLOT-MACHINE COUNTER
+    // 7. NUMERIC COUNTER ANIMATION
     // =========================================================
-    function buildOdometer(el, targetText) {
-        // targetText e.g. "315+"
-        el.innerHTML = '';
-        [...targetText].forEach(char => {
-            if (isNaN(char)) {
-                el.insertAdjacentHTML('beforeend', `<span>${char}</span>`);
-            } else {
-                const target = parseInt(char, 10);
-                const wrap = document.createElement('span');
-                wrap.className = 'odometer-wrap';
-                // build a column of 0-9 then target
-                const col = document.createElement('span');
-                col.className = 'odometer-digit';
-                let inner = '';
-                for (let k = 0; k <= 9; k++) inner += `<span style="display:block">${k}</span>`;
-                col.innerHTML = inner;
-                col.style.transform = `translateY(-${target * (1.6)}em)`;
-                wrap.appendChild(col);
-                el.appendChild(wrap);
-            }
-        });
-    }
-
-    function animateOdometerEl(el, targetText, delay = 0) {
-        // Reset to 0
-        el.innerHTML = '';
-        [...targetText].forEach(char => {
-            if (isNaN(char)) {
-                el.insertAdjacentHTML('beforeend', `<span>${char}</span>`);
-            } else {
-                const target = parseInt(char, 10);
-                const wrap = document.createElement('span');
-                wrap.className = 'odometer-wrap';
-                const col = document.createElement('span');
-                col.className = 'odometer-digit';
-                let inner = '';
-                for (let k = 0; k <= 9; k++) inner += `<span style="display:block">${k}</span>`;
-                col.innerHTML = inner;
-                col.style.transform = `translateY(0)`;
-                col.style.transition = `none`;
-                wrap.appendChild(col);
-                el.appendChild(wrap);
-
-                setTimeout(() => {
-                    col.style.transition = `transform 1.2s cubic-bezier(0.23, 1, 0.32, 1)`;
-                    col.style.transform = `translateY(-${target * 1.6}em)`;
-                }, delay + 100);
-            }
-        });
+    function animateCounterEl(el, targetText, delay = 0) {
+        const numMatch = targetText.match(/\d+/);
+        if (!numMatch) {
+            el.textContent = targetText;
+            return;
+        }
+        
+        const targetNum = parseInt(numMatch[0], 10);
+        const prefix = targetText.substring(0, numMatch.index);
+        const suffix = targetText.substring(numMatch.index + numMatch[0].length);
+        
+        const duration = 1000; // exactly 1 second
+        
+        el.textContent = prefix + '0' + suffix;
+        
+        setTimeout(() => {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                
+                // easeOutExpo easing for a smooth finish
+                const easeOut = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+                const currentNum = Math.floor(targetNum * easeOut);
+                
+                el.textContent = prefix + currentNum + suffix;
+                
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    el.textContent = targetText;
+                }
+            };
+            window.requestAnimationFrame(step);
+        }, delay);
     } 
 
     const statEls = [
@@ -74,9 +60,9 @@ document.addEventListener('DOMContentLoaded', function () {
             if (entry.isIntersecting) {
                 statEls.forEach((s, i) => {
                     const el = document.getElementById(s.id);
-                    if (el) animateOdometerEl(el, s.value, i * 200);
+                    if (el) animateCounterEl(el, s.value, i * 200);
                 });
-                if (contestRatingEl) animateOdometerEl(contestRatingEl, '1462', 400);
+                if (contestRatingEl) animateCounterEl(contestRatingEl, '1462', 400);
                 odoObserver.disconnect();
             }
         });
@@ -281,21 +267,35 @@ document.addEventListener('DOMContentLoaded', function () {
         link.addEventListener('click', () => closeMobileMenu());
     });
 
-    // Navbar scroll + scroll-spy
+    // Navbar scroll + scroll-spy (Optimized for performance)
     const sections  = document.querySelectorAll('section[id]');
     const navbar    = document.getElementById('navbar');
+    let scrollSpyTicking = false;
+
     window.addEventListener('scroll', function () {
-        const scrollY = window.pageYOffset;
-        if (navbar) navbar.classList.toggle('scrolled', scrollY > 50);
-        sections.forEach(current => {
-            const sectionTop = current.offsetTop - 150;
-            const sectionId  = current.getAttribute('id');
-            const navLink    = document.querySelector(`.nav-menu a[href*=${sectionId}]`);
-            if (navLink && scrollY > sectionTop && scrollY <= sectionTop + current.offsetHeight) {
-                document.querySelectorAll('.nav-menu a').forEach(a => a.classList.remove('active'));
-                navLink.classList.add('active');
-            }
-        });
+        if (!scrollSpyTicking) {
+            window.requestAnimationFrame(function () {
+                const scrollY = window.pageYOffset;
+                if (navbar) navbar.classList.toggle('scrolled', scrollY > 50);
+
+                sections.forEach(current => {
+                    const sectionTop = current.offsetTop - 150;
+                    const sectionHeight = current.offsetHeight;
+                    if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                        const sectionId  = current.getAttribute('id');
+                        const activeNav = document.querySelector('.nav-menu a.active');
+                        const targetNav = document.querySelector(`.nav-menu a[href*="${sectionId}"]`);
+                        
+                        if (targetNav && activeNav !== targetNav) {
+                            if (activeNav) activeNav.classList.remove('active');
+                            targetNav.classList.add('active');
+                        }
+                    }
+                });
+                scrollSpyTicking = false;
+            });
+            scrollSpyTicking = true;
+        }
     }, { passive: true });
 
     // 3D Cascade Scroll Reveal (upgraded from fade-up)
@@ -387,7 +387,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const overlay = document.getElementById('page-transition-overlay');
     if (!overlay) return;
 
+    // Force instant jump to hash before the overlay starts fading to prevent any "blink" of the hero section
+    if (window.location.hash) {
+        const target = document.querySelector(window.location.hash);
+        if (target) {
+            window.scrollTo(0, target.offsetTop - 80);
+        }
+    }
+
     // INCOMING: Add is-entering class so overlay fades from opaque→transparent on load
+    overlay.style.opacity = '';
     overlay.classList.add('is-entering');
     // Remove class after animation completes so it doesn't re-trigger
     overlay.addEventListener('animationend', function () {
@@ -451,26 +460,34 @@ document.addEventListener('DOMContentLoaded', function () {
     // Thresholds (0-1 scroll progress) at which each item lights up
     const itemThresholds = [0.28, 0.58, 0.88];
 
+    let snakeTicking = false;
+
     function onScroll() {
-        const rect    = timeline.getBoundingClientRect();
-        const winH    = window.innerHeight;
+        if (!snakeTicking) {
+            window.requestAnimationFrame(() => {
+                const rect    = timeline.getBoundingClientRect();
+                const winH    = window.innerHeight;
 
-        // progress: 0 when section bottom enters viewport, 1 when section top hits center
-        const entered = winH - rect.top;
-        const total   = rect.height + winH * 0.5;
-        const progress = Math.min(Math.max(entered / total, 0), 1);
+                // progress: 0 when section bottom enters viewport, 1 when section top hits center
+                const entered = winH - rect.top;
+                const total   = rect.height + winH * 0.5;
+                const progress = Math.min(Math.max(entered / total, 0), 1);
 
-        // Draw the snake stroke progressively
-        snakePath.style.strokeDashoffset = totalLength * (1 - progress);
+                // Draw the snake stroke progressively
+                snakePath.style.strokeDashoffset = totalLength * (1 - progress);
 
-        // Activate timeline items at their scroll thresholds
-        itemThresholds.forEach(function (threshold, i) {
-            if (progress >= threshold) {
-                tlItems[i] && tlItems[i].classList.add('tl-active');
-            } else {
-                tlItems[i] && tlItems[i].classList.remove('tl-active');
-            }
-        });
+                // Activate timeline items at their scroll thresholds
+                itemThresholds.forEach(function (threshold, i) {
+                    if (progress >= threshold) {
+                        tlItems[i] && tlItems[i].classList.add('tl-active');
+                    } else {
+                        tlItems[i] && tlItems[i].classList.remove('tl-active');
+                    }
+                });
+                snakeTicking = false;
+            });
+            snakeTicking = true;
+        }
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });

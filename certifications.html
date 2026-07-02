@@ -73,6 +73,8 @@
             object-fit: contain;
             max-height: 400px;
             transition: transform 0.3s ease;
+            -webkit-user-drag: none;
+            user-select: none;
         }
         .cert-card:hover img {
             transform: scale(1.02);
@@ -203,8 +205,11 @@
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
             const lightboxClose = document.getElementById('lightbox-close');
+            
+            lightboxImg.setAttribute('draggable', 'false');
 
             certCards.forEach(img => {
+                img.setAttribute('draggable', 'false');
                 img.addEventListener('click', () => {
                     lightboxImg.src = img.src;
                     lightbox.classList.add('active');

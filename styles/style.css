@@ -185,13 +185,23 @@ body.colorful-mode .footer-col-title {
 }
 
 body.colorful-mode .badge,
-body.colorful-mode .tech-stack span,
-body.colorful-mode .project-tech span,
-body.colorful-mode .skill-tag,
-body.colorful-mode .case-tech-tag {
+body.colorful-mode .tech-stack span {
     background: var(--primary-color) !important;
     color: #ffffff !important;
     border-color: var(--primary-color) !important;
+}
+
+body.colorful-mode .project-tech span,
+body.colorful-mode .skill-tag,
+body.colorful-mode .case-tech-tag {
+    color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+body.colorful-mode .project-tech span::after,
+body.colorful-mode .skill-tag::after,
+body.colorful-mode .case-tech-tag::after {
+    background-color: #ffffff !important;
 }
 
 body.colorful-mode .btn,
@@ -216,7 +226,6 @@ body, section, header, footer, .experience-card, .stat-card, .skill-category, .p
 }
 
 html {
-    scroll-behavior: smooth;
     scroll-padding-top: 80px;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE and Edge */
@@ -1645,17 +1654,17 @@ h1, h2, h3, h4, h5 {
     gap: clamp(16px, 3vw, 30px);
 }
 
-/* Last skill-category (Tools & Concepts) spans full width so tags fill the space */
-.skill-category:last-child {
+/* Skill-categories with full-width class span the entire width so tags fill the space */
+.skill-category.full-width {
     grid-column: 1 / -1;
     text-align: center;
 }
 
-.skill-category:last-child h3 {
+.skill-category.full-width h3 {
     justify-content: center;
 }
 
-.skill-category:last-child .skill-tags {
+.skill-category.full-width .skill-tags {
     justify-content: center;
     gap: 14px;
 }
