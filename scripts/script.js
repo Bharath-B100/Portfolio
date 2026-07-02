@@ -368,14 +368,19 @@ document.addEventListener('DOMContentLoaded', function () {
     // COLORFUL THEME TOGGLE
     // =========================================================
     const paintBtn = document.querySelector('.slogan-paint-btn');
+    const profileImg = document.getElementById('profileImage');
     if (paintBtn) {
         paintBtn.addEventListener('click', function() {
             document.body.classList.toggle('colorful-mode');
             if (document.body.classList.contains('colorful-mode')) {
                 paintBtn.textContent = 'clear';
+                if (profileImg) profileImg.src = 'assets/images/Colour_Image.JPG';
             } else {
                 paintBtn.textContent = 'paint';
+                if (profileImg) profileImg.src = 'assets/images/changed_silver.jpg';
             }
+            // Scroll to the hero section smoothly to see the color change
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
 
@@ -624,3 +629,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+
+    // =========================================================
+    // ANTI-INSPECT / SOURCE PROTECTION
+    // =========================================================
+    document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'F12' || e.keyCode === 123) e.preventDefault();
+        if ((e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || 
+            (e.metaKey && e.altKey && (e.key === 'i' || e.key === 'j' || e.key === 'c'))) e.preventDefault();
+        if ((e.ctrlKey && (e.key === 'u' || e.key === 'U')) || (e.metaKey && e.key === 'u')) e.preventDefault();
+    });

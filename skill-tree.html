@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Skill Tree</title>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-color: #ffffff;
+            
+            /* Branch Colors */
+            --color-languages: #00f3ff;
+            --color-frontend: #ff00e5;
+            --color-backend: #9d00ff;
+            --color-databases: #00ff4c;
+            --color-devops: #ff9d00;
+            --color-security: #ff003c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Particle Background Canvas */
+        #particleCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Header */
+        .title-container {
+            z-index: 10;
+            text-align: center;
+            margin-bottom: 20px;
+            margin-top: 40px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(90deg, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Tree Container */
+        .tree-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            aspect-ratio: 10 / 8;
+            z-index: 10;
+            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .tree-wrapper:hover {
+            transform: scale(1.05);
+        }
+
+        svg.skill-tree-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        /* Paths */
+        .trunk {
+            fill: none;
+            stroke: #333;
+            stroke-width: 12;
+            stroke-linecap: round;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.1));
+        }
+
+        .branch {
+            fill: none;
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: drawPath 2s ease forwards;
+        }
+
+        @keyframes drawPath {
+            to { stroke-dashoffset: 0; }
+        }
+
+        /* Branch glowing colors */
+        .b-lang { stroke: var(--color-languages); filter: drop-shadow(0 0 8px var(--color-languages)); }
+        .b-front { stroke: var(--color-frontend); filter: drop-shadow(0 0 8px var(--color-frontend)); }
+        .b-back { stroke: var(--color-backend); filter: drop-shadow(0 0 8px var(--color-backend)); }
+        .b-data { stroke: var(--color-databases); filter: drop-shadow(0 0 8px var(--color-databases)); }
+        .b-dev { stroke: var(--color-devops); filter: drop-shadow(0 0 8px var(--color-devops)); }
+        .b-sec { stroke: var(--color-security); filter: drop-shadow(0 0 8px var(--color-security)); }
+
+        /* Nodes / Leaves */
+        .node {
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.3s ease;
+            transform-origin: center;
+        }
+        
+        .tree-wrapper:hover .node {
+            opacity: 1;
+            animation: pulseNode 2s infinite alternate;
+        }
+
+        @keyframes pulseNode {
+            from { transform: scale(0.8); }
+            to { transform: scale(1.2); }
+        }
+
+        /* Icon HTML Overlay */
+        .icon-container {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(10, 10, 10, 0.8);
+            border: 2px solid;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 15px currentColor;
+            z-index: 20;
+        }
+
+        .icon-container:hover {
+            transform: translate(-50%, -50%) scale(1.2);
+            background: currentColor;
+            color: #000;
+        }
+
+        /* Colors for icons */
+        .i-lang { color: var(--color-languages); border-color: var(--color-languages); }
+        .i-front { color: var(--color-frontend); border-color: var(--color-frontend); }
+        .i-back { color: var(--color-backend); border-color: var(--color-backend); }
+        .i-data { color: var(--color-databases); border-color: var(--color-databases); }
+        .i-dev { color: var(--color-devops); border-color: var(--color-devops); }
+        .i-sec { color: var(--color-security); border-color: var(--color-security); }
+
+        /* Tooltips */
+        .tooltip {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translate(-50%, -100%) scale(0.8);
+            background: rgba(15, 15, 15, 0.95);
+            border: 1px solid;
+            padding: 15px 20px;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 0.9rem;
+            min-width: 200px;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            z-index: 30;
+            text-align: center;
+        }
+
+        .icon-container:hover .tooltip {
+            opacity: 1;
+            transform: translate(-50%, -110%) scale(1);
+        }
+
+        .tooltip h4 {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 5px;
+        }
+
+        .tooltip ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tooltip li {
+            margin: 5px 0;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+        /* Tooltip Border Colors */
+        .t-lang { border-color: var(--color-languages); box-shadow: 0 0 20px rgba(0, 243, 255, 0.2); }
+        .t-front { border-color: var(--color-frontend); box-shadow: 0 0 20px rgba(255, 0, 229, 0.2); }
+        .t-back { border-color: var(--color-backend); box-shadow: 0 0 20px rgba(157, 0, 255, 0.2); }
+        .t-data { border-color: var(--color-databases); box-shadow: 0 0 20px rgba(0, 255, 76, 0.2); }
+        .t-dev { border-color: var(--color-devops); box-shadow: 0 0 20px rgba(255, 157, 0, 0.2); }
+        .t-sec { border-color: var(--color-security); box-shadow: 0 0 20px rgba(255, 0, 60, 0.2); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .tree-wrapper {
+                max-width: 100%;
+                aspect-ratio: 1 / 1.2;
+                margin-top: 20px;
+            }
+            .icon-container {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+            .tooltip {
+                min-width: 150px;
+                font-size: 0.8rem;
+            }
+            h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particleCanvas"></canvas>
+
+    <div class="title-container">
+        <h1>Skills</h1>
+    </div>
+
+    <div class="tree-wrapper">
+        <svg class="skill-tree-svg" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid meet">
+            <!-- Trunk -->
+            <path class="trunk" d="M 500 800 L 500 650 Q 500 550 500 550" />
+            
+            <!-- Branches -->
+            <!-- Languages -->
+            <path class="branch b-lang" d="M 500 550 C 450 500, 200 600, 150 350" />
+            <!-- Sub-skills Nodes -->
+            <circle cx="390" cy="540" r="5" class="node" fill="var(--color-languages)" style="animation-delay: 0.2s" />
+            <circle cx="280" cy="548" r="5" class="node" fill="var(--color-languages)" style="animation-delay: 0.4s" />
+            <circle cx="190" cy="510" r="5" class="node" fill="var(--color-languages)" style="animation-delay: 0.6s" />
+            <circle cx="157" cy="420" r="5" class="node" fill="var(--color-languages)" style="animation-delay: 0.8s" />
+
+            <!-- Frontend -->
+            <path class="branch b-front" d="M 500 550 C 480 450, 300 450, 250 150" />
+            <!-- Sub-skills Nodes -->
+            <circle cx="430" cy="485" r="5" class="node" fill="var(--color-frontend)" style="animation-delay: 0.2s" />
+            <circle cx="355" cy="430" r="5" class="node" fill="var(--color-frontend)" style="animation-delay: 0.4s" />
+            <circle cx="290" cy="330" r="5" class="node" fill="var(--color-frontend)" style="animation-delay: 0.6s" />
+            <circle cx="260" cy="230" r="5" class="node" fill="var(--color-frontend)" style="animation-delay: 0.8s" />
+
+            <!-- Backend -->
+            <path class="branch b-back" d="M 500 550 C 500 400, 430 250, 430 100" />
+            <!-- Sub-skills Nodes -->
+            <circle cx="478" cy="420" r="5" class="node" fill="var(--color-backend)" style="animation-delay: 0.3s" />
+            <circle cx="452" cy="290" r="5" class="node" fill="var(--color-backend)" style="animation-delay: 0.5s" />
+            <circle cx="437" cy="180" r="5" class="node" fill="var(--color-backend)" style="animation-delay: 0.7s" />
+
+            <!-- Databases -->
+            <path class="branch b-data" d="M 500 550 C 500 400, 570 250, 570 100" />
+            <!-- Sub-skills Nodes -->
+            <circle cx="522" cy="420" r="5" class="node" fill="var(--color-databases)" style="animation-delay: 0.2s" />
+            <circle cx="548" cy="310" r="5" class="node" fill="var(--color-databases)" style="animation-delay: 0.4s" />
+            <circle cx="563" cy="220" r="5" class="node" fill="var(--color-databases)" style="animation-delay: 0.6s" />
+            <circle cx="568" cy="150" r="5" class="node" fill="var(--color-databases)" style="animation-delay: 0.8s" />
+
+            <!-- Design & DevOps -->
+            <path class="branch b-dev" d="M 500 550 C 520 450, 700 450, 750 150" />
+            <!-- Sub-skills Nodes -->
+            <circle cx="570" cy="485" r="5" class="node" fill="var(--color-devops)" style="animation-delay: 0.1s" />
+            <circle cx="645" cy="430" r="5" class="node" fill="var(--color-devops)" style="animation-delay: 0.3s" />
+            <circle cx="710" cy="330" r="5" class="node" fill="var(--color-devops)" style="animation-delay: 0.5s" />
+            <circle cx="738" cy="250" r="5" class="node" fill="var(--color-devops)" style="animation-delay: 0.7s" />
+            <circle cx="748" cy="190" r="5" class="node" fill="var(--color-devops)" style="animation-delay: 0.9s" />
+
+            <!-- Architecture & Security -->
+            <path class="branch b-sec" d="M 500 550 C 550 500, 800 600, 850 350" />
+            <!-- Sub-skills Nodes -->
+            <circle cx="610" cy="540" r="5" class="node" fill="var(--color-security)" style="animation-delay: 0.3s" />
+            <circle cx="720" cy="548" r="5" class="node" fill="var(--color-security)" style="animation-delay: 0.5s" />
+            <circle cx="810" cy="510" r="5" class="node" fill="var(--color-security)" style="animation-delay: 0.7s" />
+        </svg>
+
+        <!-- HTML Icons and Tooltips over SVG -->
+        <!-- Languages -->
+        <div class="icon-container i-lang" style="left: 15%; top: 43.75%;">
+            <i class="fas fa-code"></i>
+            <div class="tooltip t-lang">
+                <h4 style="color: var(--color-languages);">Languages</h4>
+                <ul>
+                    <li>C</li>
+                    <li>Java</li>
+                    <li>JavaScript</li>
+                    <li>Python</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Frontend -->
+        <div class="icon-container i-front" style="left: 25%; top: 18.75%;">
+            <i class="fas fa-paint-brush"></i>
+            <div class="tooltip t-front">
+                <h4 style="color: var(--color-frontend);">Frontend</h4>
+                <ul>
+                    <li>Bootstrap</li>
+                    <li>CSS</li>
+                    <li>HTML</li>
+                    <li>React.js</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Backend -->
+        <div class="icon-container i-back" style="left: 43%; top: 12.5%;">
+            <i class="fas fa-server"></i>
+            <div class="tooltip t-back">
+                <h4 style="color: var(--color-backend);">Backend</h4>
+                <ul>
+                    <li>Express.js</li>
+                    <li>Flask</li>
+                    <li>Node.js</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Databases -->
+        <div class="icon-container i-data" style="left: 57%; top: 12.5%;">
+            <i class="fas fa-database"></i>
+            <div class="tooltip t-data">
+                <h4 style="color: var(--color-databases);">Databases</h4>
+                <ul>
+                    <li>MongoDB</li>
+                    <li>MySQL</li>
+                    <li>PostgreSQL</li>
+                    <li>Supabase</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Design & DevOps -->
+        <div class="icon-container i-dev" style="left: 75%; top: 18.75%;">
+            <i class="fas fa-tools"></i>
+            <div class="tooltip t-dev">
+                <h4 style="color: var(--color-devops);">Design & DevOps</h4>
+                <ul>
+                    <li>Git</li>
+                    <li>GitHub</li>
+                    <li>Figma</li>
+                    <li>Canva</li>
+                    <li>Agile Methodologies</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Architecture & Security -->
+        <div class="icon-container i-sec" style="left: 85%; top: 43.75%;">
+            <i class="fas fa-shield-alt"></i>
+            <div class="tooltip t-sec">
+                <h4 style="color: var(--color-security);">Architecture & Security</h4>
+                <ul>
+                    <li>RESTful API Design</li>
+                    <li>Role-Based Access Control (RBAC)</li>
+                    <li>JWT Authentication</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script for Particle Background -->
+    <script>
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        let particles = [];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 2;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+                this.color = `rgba(255, 255, 255, ${Math.random() * 0.3})`;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > width) this.x = 0;
+                if (this.x < 0) this.x = width;
+                if (this.y > height) this.y = 0;
+                if (this.y < 0) this.y = height;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            let particleCount = Math.floor((width * height) / 15000);
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            for (let particle of particles) {
+                particle.update();
+                particle.draw();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        initParticles();
+        animate();
+    </script>
+</body>
+</html>
