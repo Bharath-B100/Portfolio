@@ -1,42 +1,23 @@
-// ============================================================
-// BHARATH RAJ B — Advanced Portfolio Script v2.0
-// ============================================================
 document.addEventListener('DOMContentLoaded', function () {
-    // =========================================================
-
-
-
-
-
-    // 7. NUMERIC COUNTER ANIMATION
-    // =========================================================
     function animateCounterEl(el, targetText, delay = 0) {
         const numMatch = targetText.match(/\d+/);
         if (!numMatch) {
             el.textContent = targetText;
             return;
         }
-        
         const targetNum = parseInt(numMatch[0], 10);
         const prefix = targetText.substring(0, numMatch.index);
         const suffix = targetText.substring(numMatch.index + numMatch[0].length);
-        
         const duration = 1000; // exactly 1 second
-        
         el.textContent = prefix + '0' + suffix;
-        
         setTimeout(() => {
             let startTimestamp = null;
             const step = (timestamp) => {
                 if (!startTimestamp) startTimestamp = timestamp;
                 const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                
-                // easeOutExpo easing for a smooth finish
                 const easeOut = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
                 const currentNum = Math.floor(targetNum * easeOut);
-                
                 el.textContent = prefix + currentNum + suffix;
-                
                 if (progress < 1) {
                     window.requestAnimationFrame(step);
                 } else {
@@ -46,15 +27,11 @@ document.addEventListener('DOMContentLoaded', function () {
             window.requestAnimationFrame(step);
         }, delay);
     } 
-
     const statEls = [
         { id: 'leetcodeSolved',  value: '500+' },
         { id: 'hackerrankSolved', value: '100+' },
     ];
-    
-    // Also target the stat cards
     const contestRatingEl = document.querySelector('.stat-card:nth-child(3) h6');
-
     const odoObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -67,34 +44,21 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }, { threshold: 0.4 });
-
     const codingStats = document.querySelector('.coding-stats');
     if (codingStats) odoObserver.observe(codingStats);
-
-    // =========================================================
-    // 8. CYBERPUNK GLITCH ANIMATION — Hero Name
-    // =========================================================
     const glitchEl = document.querySelector('.glitch-text');
     if (glitchEl) {
         function triggerGlitch() {
             glitchEl.classList.add('glitching');
             const duration = 150 + Math.random() * 250;
             setTimeout(() => glitchEl.classList.remove('glitching'), duration);
-            // Schedule next
             const nextDelay = 3000 + Math.random() * 6000;
             setTimeout(triggerGlitch, nextDelay);
         }
         setTimeout(triggerGlitch, 2500);
     }
-
-    // =========================================================
-    // ALL ORIGINAL FEATURES PRESERVED BELOW
-    // =========================================================
-
-    // Mobile menu toggle
     const menuToggle = document.getElementById('menuToggle');
     const navMenu    = document.getElementById('navMenu');
-
     function closeMobileMenu() {
         if (!navMenu) return;
         navMenu.classList.remove('active');
@@ -103,12 +67,10 @@ document.addEventListener('DOMContentLoaded', function () {
             menuToggle.setAttribute('aria-expanded', 'false');
         }
     }
-
     if (menuToggle && navMenu) {
         menuToggle.setAttribute('aria-controls', 'navMenu');
         menuToggle.setAttribute('aria-expanded', 'false');
         menuToggle.setAttribute('aria-label', 'Open navigation menu');
-
         menuToggle.addEventListener('click', function (e) {
             e.stopPropagation();
             const isOpen = navMenu.classList.toggle('active');
@@ -117,23 +79,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 : '<i class="fas fa-bars"></i>';
             menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         });
-
-        // Close menu when clicking outside
         document.addEventListener('click', function (e) {
             if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
                 closeMobileMenu();
             }
         });
-
-        // Close on Escape key
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') closeMobileMenu();
         });
     }
-
-
-
-    // 3D Interactive Hero Image Tilt (mousemove)
     const heroImage   = document.querySelector('.hero-image');
     const heroSection = document.querySelector('.hero');
     let rafId = null;
@@ -154,14 +108,10 @@ document.addEventListener('DOMContentLoaded', function () {
             setTimeout(() => { heroImage.style.transition = 'transform 0.1s ease-out'; }, 500);
         });
     }
-
-    // Achievement Badges
     document.querySelectorAll('.badge').forEach(badge => {
         badge.addEventListener('mouseenter', () => badge.style.transform = 'scale(1.2)');
         badge.addEventListener('mouseleave', () => badge.style.transform = 'scale(1)');
     });
-
-    // Testimonial Slider
     const testimonialContainer = document.querySelector('.testimonial-slider');
     const testimonials  = document.querySelectorAll('.testimonial');
     const dotsContainer = document.querySelector('.slider-dots');
@@ -169,16 +119,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const nextBtn       = document.querySelector('.slider-next');
     let currentTestimonial = 0;
     let testimonialInterval;
-
     function goToSlide(dir) {
         if (dir === 'next') currentTestimonial = (currentTestimonial + 1) % testimonials.length;
         else                currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
         showTestimonial(currentTestimonial);
     }
-
     if (testimonialContainer && testimonials.length && dotsContainer && prevBtn && nextBtn) {
         let isHovered = false;
-
         testimonials.forEach((_, i) => {
             const dot = document.createElement('span');
             dot.addEventListener('click', () => { showTestimonial(i); startSlider(); });
@@ -190,21 +137,17 @@ document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.slider-dots span').forEach((d, i) => d.classList.toggle('active', i === index));
             currentTestimonial = index;
         }
-        
         function startSlider() {
             if (testimonialInterval) clearInterval(testimonialInterval);
             if (!isHovered) {
                 testimonialInterval = setInterval(() => goToSlide('next'), 5000);
             }
         }
-        
         function stopSlider() {
             clearInterval(testimonialInterval);
         }
-
         prevBtn.addEventListener('click', () => { goToSlide('prev'); startSlider(); });
         nextBtn.addEventListener('click', () => { goToSlide('next'); startSlider(); });
-        
         testimonialContainer.addEventListener('mouseenter', () => {
             isHovered = true;
             stopSlider();
@@ -213,12 +156,9 @@ document.addEventListener('DOMContentLoaded', function () {
             isHovered = false;
             startSlider();
         });
-        
         startSlider();
         showTestimonial(0);
     }
-
-    // Contact Form
     const contactForm = document.getElementById('contactForm');
     const formStatus  = document.getElementById('formStatus');
     if (contactForm && formStatus) {
@@ -248,13 +188,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-
-    // Current Year
     const currentYearEl = document.getElementById('currentYear');
     if (currentYearEl) currentYearEl.textContent = new Date().getFullYear();
-
-
-    // Particles.js
     const particlesContainer = document.getElementById('particles-js');
     if (typeof particlesJS !== 'undefined' && particlesContainer) {
         particlesJS('particles-js', {
@@ -262,23 +197,26 @@ document.addEventListener('DOMContentLoaded', function () {
             interactivity: { detect_on: 'canvas', events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } } }
         });
     }
-
-    // Close mobile menu on link click
     document.querySelectorAll('.nav-menu a').forEach(link => {
         link.addEventListener('click', () => closeMobileMenu());
     });
-
-    // Navbar scroll + scroll-spy (Optimized for performance)
     const sections  = document.querySelectorAll('section[id]');
     const navbar    = document.getElementById('navbar');
     let scrollSpyTicking = false;
-
+    let lastScrollY = 0;
     window.addEventListener('scroll', function () {
         if (!scrollSpyTicking) {
             window.requestAnimationFrame(function () {
                 const scrollY = window.pageYOffset;
-                if (navbar) navbar.classList.toggle('scrolled', scrollY > 50);
-
+                if (navbar) {
+                    navbar.classList.toggle('scrolled', scrollY > 50);
+                    if (scrollY > lastScrollY && scrollY > 150) {
+                        navbar.classList.add('hidden-circle');
+                    } else if (scrollY < lastScrollY || scrollY <= 150) {
+                        navbar.classList.remove('hidden-circle');
+                    }
+                    lastScrollY = scrollY <= 0 ? 0 : scrollY;
+                }
                 sections.forEach(current => {
                     const sectionTop = current.offsetTop - 150;
                     const sectionHeight = current.offsetHeight;
@@ -286,7 +224,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         const sectionId  = current.getAttribute('id');
                         const activeNav = document.querySelector('.nav-menu a.active');
                         const targetNav = document.querySelector(`.nav-menu a[href*="${sectionId}"]`);
-                        
                         if (targetNav && activeNav !== targetNav) {
                             if (activeNav) activeNav.classList.remove('active');
                             targetNav.classList.add('active');
@@ -298,20 +235,15 @@ document.addEventListener('DOMContentLoaded', function () {
             scrollSpyTicking = true;
         }
     }, { passive: true });
-
-    // 3D Cascade Scroll Reveal (upgraded from fade-up)
     const fadeEls = document.querySelectorAll('.section-title, .about-text, .about-sidebar, .timeline-item, .contact-info, .contact-form, .skill-category, .project-card');
     const eliteObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
     }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-
     fadeEls.forEach(el => {
         if (el.classList.contains('project-card') || el.classList.contains('skill-category')) el.classList.add('scale-in');
         else el.classList.add('fade-up');
         eliteObserver.observe(el);
     });
-
-    // Smooth scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -321,14 +253,9 @@ document.addEventListener('DOMContentLoaded', function () {
             if (targetEl) window.scrollTo({ top: targetEl.offsetTop - 80, behavior: 'smooth' });
         });
     });
-
-    // =========================================================
-    // LIVE GITHUB API STATS
-    // =========================================================
     (async function fetchGitHubStats() {
         const USERNAME = 'Bharath-B100';
         try {
-            // Fetch user profile
             const userRes = await fetch(`https://api.github.com/users/${USERNAME}`);
             if (userRes.ok) {
                 const user = await userRes.json();
@@ -337,8 +264,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (repoEl) repoEl.textContent = user.public_repos ?? '—';
                 if (followerEl) followerEl.textContent = user.followers ?? '—';
             }
-
-            // Fetch latest push event for commit info
             const eventsRes = await fetch(`https://api.github.com/users/${USERNAME}/events/public?per_page=10`);
             if (eventsRes.ok) {
                 const events = await eventsRes.json();
@@ -355,7 +280,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
         } catch (err) {
-            // Fallback to static values if API fails (rate-limit, offline, etc.)
             const repoEl = document.getElementById('repoCount');
             const followerEl = document.getElementById('followerCount');
             if (repoEl && repoEl.textContent === '—') repoEl.textContent = '12';
@@ -363,10 +287,6 @@ document.addEventListener('DOMContentLoaded', function () {
             console.warn('GitHub API unavailable, using static fallback.', err);
         }
     })();
-
-    // =========================================================
-    // COLORFUL THEME TOGGLE
-    // =========================================================
     const paintBtn = document.querySelector('.slogan-paint-btn');
     const profileImg = document.getElementById('profileImage');
     if (paintBtn) {
@@ -379,71 +299,48 @@ document.addEventListener('DOMContentLoaded', function () {
                 paintBtn.textContent = 'paint';
                 if (profileImg) profileImg.src = 'assets/images/changed_silver.jpg';
             }
-            // Scroll to the hero section smoothly to see the color change
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
-
 }); // End DOMContentLoaded
-
-// ============================================================
-// PAGE TRANSITIONS — Fixed & Safe
-// ============================================================
 document.addEventListener('DOMContentLoaded', function () {
     const overlay = document.getElementById('page-transition-overlay');
     if (!overlay) return;
-
-    // Force instant jump to hash before the overlay starts fading to prevent any "blink" of the hero section
     if (window.location.hash) {
         const target = document.querySelector(window.location.hash);
         if (target) {
             window.scrollTo(0, target.offsetTop - 80);
         }
     }
-
-    // INCOMING: Add is-entering class so overlay fades from opaque→transparent on load
     overlay.style.opacity = '';
     overlay.classList.add('is-entering');
-    // Remove class after animation completes so it doesn't re-trigger
     overlay.addEventListener('animationend', function () {
         overlay.classList.remove('is-entering');
     }, { once: true });
-
-    // OUTGOING: Intercept internal link clicks and fade out before navigating
     document.addEventListener('click', function (e) {
         const link = e.target.closest('a[href]');
         if (!link) return;
-
         const href = link.getAttribute('href');
-        // Skip hash links, mailto, tel, download, _blank, and external URLs
         if (!href) return;
         if (href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:')) return;
         if (link.hasAttribute('download')) return;
         if (link.target === '_blank') return;
+        if (link.classList.contains('lightbox-link')) return;
         if (href.startsWith('http://') || href.startsWith('https://')) return;
-
         e.preventDefault();
         overlay.classList.remove('is-entering');
         overlay.classList.add('is-leaving');
-
         setTimeout(function () {
             window.location.href = href;
         }, 380);
     });
-
-    // Handle BFCache (Back-Forward Cache) restoration (e.g., trackpad swipe back)
     window.addEventListener('pageshow', function (e) {
         if (e.persisted) {
             overlay.classList.remove('is-leaving');
-            // Re-trigger enter animation to ensure a smooth reveal if needed
             overlay.classList.add('is-entering');
         }
     });
 });
-
-// ============================================================
-// SNAKE SCROLL REVEAL — SVG stroke-dashoffset animation
-// ============================================================
 (function () {
     const snakePath = document.getElementById('snakePath');
     const timeline  = document.getElementById('snake-timeline');
@@ -452,37 +349,22 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('tl-item-2'),
         document.getElementById('tl-item-3'),
     ];
-
     if (!snakePath || !timeline) return;
-
-    // Measure total path length once
     const totalLength = snakePath.getTotalLength();
-
-    // Initialize: hide the entire path
     snakePath.style.strokeDasharray  = totalLength;
     snakePath.style.strokeDashoffset = totalLength;
     snakePath.style.transition       = 'stroke-dashoffset 0.1s linear';
-
-    // Thresholds (0-1 scroll progress) at which each item lights up
     const itemThresholds = [0.28, 0.58, 0.88];
-
     let snakeTicking = false;
-
     function onScroll() {
         if (!snakeTicking) {
             window.requestAnimationFrame(() => {
                 const rect    = timeline.getBoundingClientRect();
                 const winH    = window.innerHeight;
-
-                // progress: 0 when section bottom enters viewport, 1 when section top hits center
                 const entered = winH - rect.top;
                 const total   = rect.height + winH * 0.5;
                 const progress = Math.min(Math.max(entered / total, 0), 1);
-
-                // Draw the snake stroke progressively
                 snakePath.style.strokeDashoffset = totalLength * (1 - progress);
-
-                // Activate timeline items at their scroll thresholds
                 itemThresholds.forEach(function (threshold, i) {
                     if (progress >= threshold) {
                         tlItems[i] && tlItems[i].classList.add('tl-active');
@@ -495,22 +377,14 @@ document.addEventListener('DOMContentLoaded', function () {
             snakeTicking = true;
         }
     }
-
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll(); // run once on load in case section already visible
 })();
-
-
-
-    // =========================================================
-    // SKILL TREE PARTICLE BACKGROUND
-    // =========================================================
     const canvas = document.getElementById("particleCanvas");
     if (canvas) {
         const ctx = canvas.getContext("2d");
         let width, height;
         let particles = [];
-
         function resizeCanvas() {
             const section = document.getElementById("skills");
             if(section) {
@@ -518,10 +392,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 height = canvas.height = section.clientHeight;
             }
         }
-
         window.addEventListener("resize", resizeCanvas);
         setTimeout(resizeCanvas, 100);
-
         class Particle {
             constructor() {
                 this.x = Math.random() * (width || window.innerWidth);
@@ -546,7 +418,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 ctx.fill();
             }
         }
-
         function initParticles() {
             particles = [];
             let particleCount = Math.floor((width * height) / 10000);
@@ -554,85 +425,54 @@ document.addEventListener('DOMContentLoaded', function () {
                 particles.push(new Particle());
             }
         }
-
         function animateCanvas() {
             ctx.clearRect(0, 0, width, height);
-            
-            // If in colorful mode, maybe tint particles slightly? Let us stick to white for now.
             for (let particle of particles) {
                 particle.update();
                 particle.draw();
             }
             requestAnimationFrame(animateCanvas);
         }
-
         setTimeout(() => {
             resizeCanvas();
             initParticles();
             animateCanvas();
         }, 500);
     }
-
-
-
-    // =========================================================
-    // SKILL TREE INTERACTIVE NODES
-    // =========================================================
     window.toggleSkills = function(category) {
         const hotspots = document.querySelectorAll(".icon-container.hotspot");
         const allSkillNodes = document.querySelectorAll(".skill-node");
-
         const clickedHotspot = document.querySelector(`.icon-container.hotspot[data-category="${category}"]`);
         if (!clickedHotspot) return;
-        
         const isActive = clickedHotspot.classList.contains("active");
-
-        // Close all
         hotspots.forEach(h => h.classList.remove("active"));
         allSkillNodes.forEach(node => node.classList.remove("active"));
-
-        // Open clicked
         if (!isActive) {
             clickedHotspot.classList.add("active");
             const targetNodes = document.querySelectorAll(`.skill-node.${category}`);
             targetNodes.forEach(node => node.classList.add("active"));
         }
     };
-
-    // =========================================================
-    // ANTI-INSPECT / SOURCE PROTECTION
-    // =========================================================
     document.addEventListener('contextmenu', function(e) {
         e.preventDefault();
     });
-    
     document.addEventListener('keydown', function(e) {
-        // Prevent F12
         if (e.key === 'F12' || e.keyCode === 123) {
             e.preventDefault();
         }
-        // Prevent Ctrl+Shift+I (Windows) / Cmd+Opt+I (Mac)
         if ((e.ctrlKey && e.shiftKey && e.key === 'I') || (e.metaKey && e.altKey && e.key === 'i')) {
             e.preventDefault();
         }
-        // Prevent Ctrl+Shift+J (Windows) / Cmd+Opt+J (Mac)
         if ((e.ctrlKey && e.shiftKey && e.key === 'J') || (e.metaKey && e.altKey && e.key === 'j')) {
             e.preventDefault();
         }
-        // Prevent Ctrl+U (Windows) / Cmd+U (Mac) - View Source
         if ((e.ctrlKey && e.key === 'u') || (e.ctrlKey && e.key === 'U') || (e.metaKey && e.key === 'u')) {
             e.preventDefault();
         }
-        // Prevent Ctrl+Shift+C (Windows) / Cmd+Opt+C (Mac)
         if ((e.ctrlKey && e.shiftKey && e.key === 'C') || (e.metaKey && e.altKey && e.key === 'c')) {
             e.preventDefault();
         }
     });
-
-
-    // =========================================================
-    // ANTI-INSPECT / SOURCE PROTECTION
-    // =========================================================
     document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
     document.addEventListener('keydown', function(e) {
         if (e.key === 'F12' || e.keyCode === 123) e.preventDefault();
@@ -640,10 +480,6 @@ document.addEventListener('DOMContentLoaded', function () {
             (e.metaKey && e.altKey && (e.key === 'i' || e.key === 'j' || e.key === 'c'))) e.preventDefault();
         if ((e.ctrlKey && (e.key === 'u' || e.key === 'U')) || (e.metaKey && e.key === 'u')) e.preventDefault();
     });
-
-    // =========================================================
-    // GLOBAL LIGHTBOX LOGIC
-    // =========================================================
     (function() {
         const viewResumeBtn = document.getElementById('viewResumeBtn');
         const lightbox = document.getElementById('lightbox');
@@ -651,7 +487,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const lightboxImg2 = document.getElementById('lightbox-img-2');
         const lightboxClose = document.getElementById('lightbox-close');
         const lightboxDownload = document.getElementById('lightbox-download');
-
         if (viewResumeBtn && lightbox && lightboxImg) {
             viewResumeBtn.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -666,7 +501,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 lightbox.classList.add('active');
             });
         }
-
+        const lightboxLinks = document.querySelectorAll('.lightbox-link');
+        lightboxLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (lightbox && lightboxImg) {
+                    lightboxImg.src = this.getAttribute('href');
+                    if (lightboxImg2) lightboxImg2.style.display = 'none';
+                    if (lightboxDownload) lightboxDownload.style.display = 'none';
+                    lightbox.classList.add('active');
+                }
+            });
+        });
         function closeLightbox() {
             if (lightbox) lightbox.classList.remove('active');
             if (lightboxImg2) lightboxImg2.style.display = 'none';
@@ -674,11 +520,9 @@ document.addEventListener('DOMContentLoaded', function () {
             if (lightboxImg) lightboxImg.classList.remove('zoomed');
             if (lightboxImg2) lightboxImg2.classList.remove('zoomed');
         }
-
         if (lightboxClose) {
             lightboxClose.addEventListener('click', closeLightbox);
         }
-
         if (lightbox) {
             lightbox.addEventListener('click', (e) => {
                 if (e.target === lightbox || e.target.classList.contains('lightbox-scroll-container')) {
@@ -686,14 +530,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         }
-        
-        // Zoom functionality
         function toggleZoom(e) {
             e.target.classList.toggle('zoomed');
         }
         if (lightboxImg) lightboxImg.addEventListener('click', toggleZoom);
         if (lightboxImg2) lightboxImg2.addEventListener('click', toggleZoom);
-        
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && lightbox && lightbox.classList.contains('active')) {
                 closeLightbox();

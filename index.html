@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bharath Raj B | Portfolio</title>
+    <link rel="icon" type="image/png" href="">
     <meta name="description"
         content="Bharath Raj B - CSBS Student & Full-Stack Developer skilled in ML, IoT, and Full-Stack Development">
     <meta name="keywords" content="portfolio, developer, machine learning, full-stack, IoT, Bharath Raj">
@@ -13,27 +13,20 @@
     <meta property="og:image" content="assets/images/changed_silver.jpg">
     <meta property="og:url" content="https://bharathraj-portfolio.vercel.app">
     <meta name="theme-color" content="#1d1d1f">
-
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://api.fontshare.com/v2/css?f[]=chubbo&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 </head>
-
 <body>
-    <!-- SVG Filters for Electric Border -->
     <svg width="0" height="0" style="position: absolute; width: 0; height: 0; overflow: hidden; pointer-events: none;">
         <filter id="electric-noise">
             <feTurbulence type="fractalNoise" baseFrequency="0.04 0.15" numOctaves="3" result="noise"/>
             <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G"/>
         </filter>
     </svg>
-
-    <!-- Page Transition Overlay -->
     <div id="page-transition-overlay" style="opacity: 1;"></div>
-
-    <!-- Navigation -->
     <nav id="navbar">
         <div class="container nav-container">
             <a href="#home" class="logo">Bharath <span>Raj B</span></a>
@@ -46,15 +39,12 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <div class="nav-actions">
-                <!-- Mobile Menu Toggle -->
                 <button class="menu-toggle" id="menuToggle">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
         </div>
     </nav>
-
-    <!-- Hero Section with Particles -->
     <section id="home" class="hero">
         <div id="particles-js"></div>
         <div class="container hero-container">
@@ -68,15 +58,11 @@
                     <a href="#projects" class="btn-track"><span class="btn primary-btn">View My Work</span></a>
                     <a href="#contact" class="btn-track"><span class="btn secondary-btn">Contact Me</span></a>
                 </div>
-
-                <!-- View Resume Button -->
                 <div class="resume-download">
                     <a href="javascript:void(0)" class="btn-track" id="viewResumeBtn">
                         <span class="btn download-btn"><i class="fas fa-eye"></i> View Resume</span>
                     </a>
                 </div>
-
-                <!-- GitHub Stats -->
                 <div class="github-stats" id="githubStats">
                     <div class="stat-item">
                         <i class="fab fa-github"></i>
@@ -107,7 +93,6 @@
                 <div class="image-wrapper">
                     <img src="assets/images/changed_silver.jpg" alt="Bharath Raj" id="profileImage">
                 </div>
-                <!-- Achievement Badges - Moved below image -->
                 <div class="achievement-badges">
                     <span class="badge" data-tooltip="LeetCode 500+ Problems">
                         <i class="fas fa-code"></i>
@@ -122,8 +107,6 @@
             </div>
         </div>
     </section>
-
-    <!-- About Section -->
     <section id="about" class="section">
         <div class="container">
             <h2 class="section-title">About Me</h2>
@@ -131,13 +114,9 @@
                 <div class="about-text">
                     <h3>Enthusiastic CSBS Student</h3>
                     <p>Full-Stack Developer bridging the gap between robust software engineering and business logic. Specializing in building scalable REST APIs, secure role-based systems, and interactive user experiences. Backed by competitive programming grit and award-winning IoT problem-solving.</p>
-
-                    <!-- Interactive Timeline with SVG Snake -->
-                     
                     <div class="timeline-section" id="journey-section">
                         <h4>My Journey</h4>
                         <div class="timeline" id="snake-timeline">
-                            <!-- SVG Snake Path (drawn on scroll) -->
                             <svg id="snakeSVG" class="snake-svg" viewBox="0 0 80 420" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
                                 <defs>
                                     <linearGradient id="snakeGrad" x1="0" y1="0" x2="0" y2="1">
@@ -151,7 +130,6 @@
                                         <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
                                     </filter>
                                 </defs>
-                                <!-- Background faint snake (always visible as guide) -->
                                 <path id="snakePathBg"
                                     d="M 40 10
                                        C 70 30, 70 60, 40 80
@@ -164,7 +142,6 @@
                                     stroke="rgba(180,180,180,0.15)"
                                     stroke-width="8"
                                     stroke-linecap="round"/>
-                                <!-- Animated silver snake (drawn on scroll) -->
                                 <path id="snakePath"
                                     d="M 40 10
                                        C 70 30, 70 60, 40 80
@@ -179,7 +156,6 @@
                                     stroke-linecap="round"
                                     filter="url(#snakeGlow)"/>
                             </svg>
-
                             <div class="timeline-item" id="tl-item-1">
                                 <div class="timeline-date">2020-2021</div>
                                 <div class="timeline-content">
@@ -203,8 +179,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Certifications - MOVED HERE -->
                     <div class="certifications">
                         <h4>Certifications</h4>
                         <ul>
@@ -220,22 +194,21 @@
                 <div class="about-sidebar">
                     <div class="contact-info">
                         <h4>Contact Information</h4>
-                        <p><i class="fas fa-phone"></i> +91 9943935576</p>
-                        <p><i class="fas fa-envelope"></i> bharathrajmurali1010@gmail.com</p>
+                        <p><img src="assets/images/Gif/icons8-phone.gif" alt="Phone" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 6px; filter: none !important;"> +91 9943935576</p>
+                        <p><img src="assets/images/Gif/icons8-mail.gif" alt="Mail" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 6px; filter: none !important;"> bharathrajmurali1010@gmail.com</p>
                         <div class="social-links">
                             <a href="https://www.linkedin.com/in/bharath-raj143/" target="_blank">
-                                <img src="https://static.vecteezy.com/system/resources/previews/018/930/480/non_2x/linkedin-logo-linkedin-icon-transparent-free-png.png"
-                                    alt="LinkedIn" class="social-logo" loading="lazy">
+                                <img src="assets/images/Gif/icons8-linkedin.gif"
+                                    alt="LinkedIn" class="social-logo" loading="lazy" style="filter: none !important;">
                                 LinkedIn
                             </a>
                             <a href="https://github.com/Bharath-B100" target="_blank">
-                                <img src="https://images.seeklogo.com/logo-png/30/2/github-logo-png_seeklogo-304612.png"
-                                    alt="GitHub" class="social-logo" loading="lazy">
+                                <img src="assets/images/Gif/icons8-github.gif"
+                                    alt="GitHub" class="social-logo" loading="lazy" style="filter: none !important;">
                                 GitHub
                             </a>
                         </div>
                     </div>
-
                     <div class="achievements">
                         <h4>Achievements</h4>
                         <ul>
@@ -252,8 +225,6 @@
                             <li>Vishwakarma Awards 2024: Top 6 Finalist among 3000+ teams</li>
                             <li>Paper Presentation Winner & Runner-up</li>
                         </ul>
-
-                        <!-- Coding Stats -->
                         <div class="coding-stats">
                             <h5>Live Coding Stats</h5>
                             <div class="stats-grid">
@@ -276,8 +247,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Experience Section -->
     <section id="experience" class="section dark-section">
         <div class="container">
             <h2 class="section-title">Experience</h2>
@@ -285,7 +254,7 @@
                 <div class="experience-card">
                     <div class="exp-header">
                         <h3 style="text-transform: uppercase;">UI/UX DESIGN INTERN</h3>
-                        <span class="company" style="font-weight: 800; text-transform: uppercase;">SRI NANDHA INFOTECH <a href="assets/images/Certifications/Intership.jpeg" target="_blank" style="font-size: 0.75rem; color: var(--primary-color); text-decoration: none; margin-left: 8px; font-weight: 700; text-transform: none; display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 20px; background: rgba(0, 113, 227, 0.1);"><i class="fas fa-certificate" style="font-size: 0.7rem;"></i> See Certificate</a></span>
+                        <span class="company" style="font-weight: 800; text-transform: uppercase;">SRI NANDHA INFOTECH <a href="assets/images/Certifications/Intership.jpeg" class="lightbox-link" style="font-size: 0.75rem; color: var(--primary-color); text-decoration: none; margin-left: 8px; font-weight: 700; text-transform: none; display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 20px; background: rgba(0, 113, 227, 0.1);"><i class="fas fa-certificate" style="font-size: 0.7rem;"></i> See Certificate</a></span>
                         <span class="date">2025</span>
                     </div>
                     <ul class="exp-details">
@@ -304,8 +273,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Projects Section -->
     <section id="projects" class="section">
         <div class="container">
             <h2 class="section-title">Projects</h2>
@@ -329,7 +296,6 @@
                         style="margin-top: 15px; align-self: flex-start;"><span class="btn secondary-btn small-btn">Read
                             Case Study <i class="fas fa-arrow-right"></i></span></a>
                 </div>
-
                 <div class="project-card">
                     <div class="project-header">
                         <h3>Financial Portfolio Management System</h3>
@@ -348,8 +314,6 @@
                         style="margin-top: 15px; align-self: flex-start;"><span class="btn secondary-btn small-btn">Read
                             Case Study <i class="fas fa-arrow-right"></i></span></a>
                 </div>
-
-                <!-- Hostel Management System -->
                 <div class="project-card">
                     <div class="project-header">
                         <h3>Hostel Management System</h3>
@@ -369,8 +333,6 @@
                         style="margin-top: 15px; align-self: flex-start;"><span class="btn secondary-btn small-btn">Read
                             Case Study <i class="fas fa-arrow-right"></i></span></a>
                 </div>
-
-                <!-- Smart Shoe For Visually Impaired Individuals -->
                 <div class="project-card">
                     <div class="project-header">
                         <h3>Smart Shoe For Visually Impaired</h3>
@@ -393,8 +355,6 @@
                         style="margin-top: 15px; align-self: flex-start;"><span class="btn secondary-btn small-btn">Read
                             Case Study <i class="fas fa-arrow-right"></i></span></a>
                 </div>
-
-                <!-- DYD-Cloths E-commerce -->
                 <div class="project-card">
                     <div class="project-header">
                         <h3>DYD-Cloths (E-commerce)</h3>
@@ -417,8 +377,6 @@
                         style="margin-top: 15px; align-self: flex-start;"><span class="btn secondary-btn small-btn">Read
                             Case Study <i class="fas fa-arrow-right"></i></span></a>
                 </div>
-
-                <!-- Traveloop -->
                 <div class="project-card">
                     <div class="project-header">
                         <h3>Traveloop</h3>
@@ -444,83 +402,67 @@
             </div>
         </div>
     </section>
-
-    <!-- Skills Section -->
     <section id="skills" class="section dark-section" style="position: relative; overflow: hidden; min-height: 80vh; display: flex; align-items: center;">
         <canvas id="particleCanvas"></canvas>
         <div class="container" style="position: relative; z-index: 2; width: 100%;">
             <h2 class="section-title">Skills</h2>
-            
             <div class="tree-wrapper">
                 <div class="tree-shake-wrapper" style="position: relative; width: 100%; height: 100%;">
                     <img src="assets/images/skill-tree-exact.png" alt="Skill Tree" class="skill-tree-img">
-                    
-                    <!-- Main Category Buttons -->
                     <div class="icon-container hotspot liquid-btn" style="left: 35%; top: 22%;" data-category="design" onclick="toggleSkills('design')">
                         <i class="fas fa-tools"></i>
+                        <div class="tooltip"><h4>Tools & Design</h4></div>
                     </div>
                     <div class="icon-container hotspot liquid-btn" style="left: 28%; top: 36%;" data-category="languages" onclick="toggleSkills('languages')">
                         <i class="fas fa-code"></i>
+                        <div class="tooltip"><h4>Languages</h4></div>
                     </div>
                     <div class="icon-container hotspot liquid-btn" style="left: 35%; top: 48%;" data-category="frontend" onclick="toggleSkills('frontend')">
                         <i class="fas fa-paint-brush"></i>
+                        <div class="tooltip"><h4>Frontend</h4></div>
                     </div>
                     <div class="icon-container hotspot liquid-btn" style="left: 65%; top: 22%;" data-category="architecture" onclick="toggleSkills('architecture')">
-                        <i class="fas fa-shield-alt"></i>
+                        <i class="fas fa-sitemap"></i>
+                        <div class="tooltip"><h4>Architecture</h4></div>
                     </div>
                     <div class="icon-container hotspot liquid-btn" style="left: 72%; top: 36%;" data-category="backend" onclick="toggleSkills('backend')">
                         <i class="fas fa-server"></i>
+                        <div class="tooltip"><h4>Backend</h4></div>
                     </div>
                     <div class="icon-container hotspot liquid-btn" style="left: 65%; top: 48%;" data-category="databases" onclick="toggleSkills('databases')">
                         <i class="fas fa-database"></i>
+                        <div class="tooltip"><h4>Databases</h4></div>
                     </div>
-
-                    <!-- Individual Skill Nodes (Hidden by default) -->
-                    <!-- Design & DevOps -->
                     <div class="skill-node design" style="left: 20%; top: 5%; --delay: 1;">Git</div>
                     <div class="skill-node design" style="left: 32%; top: 2%; --delay: 2;">GitHub</div>
                     <div class="skill-node design" style="left: 45%; top: 6%; --delay: 3;">Figma</div>
                     <div class="skill-node design" style="left: 14%; top: 15%; --delay: 4;">Canva</div>
                     <div class="skill-node design" style="left: 23%; top: 12%; --delay: 5;">Agile</div>
-
-                    <!-- Languages -->
                     <div class="skill-node languages" style="left: 10%; top: 25%; --delay: 1;">C</div>
                     <div class="skill-node languages" style="left: 20%; top: 22%; --delay: 2;">Java</div>
                     <div class="skill-node languages" style="left: 4%; top: 35%; --delay: 3;">JavaScript</div>
                     <div class="skill-node languages" style="left: 14%; top: 38%; --delay: 4;">Python</div>
-
-                    <!-- Frontend -->
                     <div class="skill-node frontend" style="left: 6%; top: 47%; --delay: 1;">Bootstrap</div>
                     <div class="skill-node frontend" style="left: 16%; top: 51%; --delay: 2;">CSS</div>
                     <div class="skill-node frontend" style="left: 9%; top: 60%; --delay: 3;">HTML</div>
                     <div class="skill-node frontend" style="left: 22%; top: 59%; --delay: 4;">React.js</div>
-
-                    <!-- Architecture & Security -->
                     <div class="skill-node architecture" style="left: 55%; top: 2%; --delay: 1;">REST API</div>
                     <div class="skill-node architecture" style="left: 68%; top: 5%; --delay: 2;">RBAC</div>
                     <div class="skill-node architecture" style="left: 82%; top: 12%; --delay: 3;">JWT</div>
-
-                    <!-- Backend -->
                     <div class="skill-node backend" style="left: 80%; top: 26%; --delay: 1;">Express.js</div>
                     <div class="skill-node backend" style="left: 92%; top: 34%; --delay: 2;">Flask</div>
                     <div class="skill-node backend" style="left: 83%; top: 45%; --delay: 3;">Node.js</div>
-
-                    <!-- Databases -->
                     <div class="skill-node databases" style="left: 78%; top: 48%; --delay: 1;">MongoDB</div>
-                    <div class="skill-node databases" style="left: 90%; top: 48%; --delay: 2;">MySQL</div>
-                    <div class="skill-node databases" style="left: 79%; top: 58%; --delay: 3;">PostgreSQL</div>
-                    <div class="skill-node databases" style="left: 92%; top: 58%; --delay: 4;">Supabase</div>
+                    <div class="skill-node databases" style="left: 90%; top: 48%; --delay: 2;">PostgreSQL</div>
+                    <div class="skill-node databases" style="left: 79%; top: 58%; --delay: 3;">Supabase</div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Testimonials Section -->
     <section id="testimonials" class="section dark-section">
         <div class="container">
             <h2 class="section-title">What People Say</h2>
             <div class="testimonial-slider">
-                <!-- Fixed-height track: all 3 cards stack here, no layout shift -->
                 <div class="testimonial-track">
                     <div class="testimonial active">
                         <div class="testimonial-content">
@@ -552,7 +494,7 @@
                             </div>
                         </div>
                     </div>
-                </div><!-- /.testimonial-track -->
+                </div>
                 <div class="slider-controls">
                     <button class="slider-prev"><i class="fas fa-chevron-left"></i></button>
                     <div class="slider-dots"></div>
@@ -561,8 +503,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Contact Section -->
     <section id="contact" class="section">
         <div class="container">
             <h2 class="section-title">Get In Touch</h2>
@@ -572,17 +512,17 @@
                     <p>I'm always open to discussing new opportunities, collaborations, or just having a friendly chat
                         about technology.</p>
                     <div class="contact-details">
-                        <p><i class="fas fa-phone"></i> +91 9943935576</p>
-                        <p><i class="fas fa-envelope"></i> bharathrajmurali1010@gmail.com</p>
+                        <p><img src="assets/images/Gif/icons8-phone.gif" alt="Phone" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 6px; filter: none !important;"> +91 9943935576</p>
+                        <p><img src="assets/images/Gif/icons8-mail.gif" alt="Mail" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 6px; filter: none !important;"> bharathrajmurali1010@gmail.com</p>
                         <div class="contact-social">
                             <a href="https://www.linkedin.com/in/bharath-raj143/" target="_blank"
                                 class="social-icon">
-                                <img src="https://static.vecteezy.com/system/resources/previews/018/930/480/non_2x/linkedin-logo-linkedin-icon-transparent-free-png.png"
-                                    alt="LinkedIn" class="social-logo-img" loading="lazy">
+                                <img src="assets/images/Gif/icons8-linkedin.gif"
+                                    alt="LinkedIn" class="social-logo-img" loading="lazy" style="filter: none !important;">
                             </a>
                             <a href="https://github.com/Bharath-B100" target="_blank" class="social-icon">
-                                <img src="https://images.seeklogo.com/logo-png/30/2/github-logo-png_seeklogo-304612.png"
-                                    alt="GitHub" class="social-logo-img" loading="lazy">
+                                <img src="assets/images/Gif/icons8-github.gif"
+                                    alt="GitHub" class="social-logo-img" loading="lazy" style="filter: none !important;">
                             </a>
                             <a href="https://leetcode.com/u/Bharath_Raj_B/" target="_blank" class="social-icon">
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png"
@@ -595,7 +535,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="contact-form">
                     <h3>Send Me a Message</h3>
                     <form id="contactForm" action="https://formspree.io/f/mzznjkln" method="POST">
@@ -620,53 +559,40 @@
             </div>
         </div>
     </section>
-
-    <!-- Pre-Footer Slogan -->
     <div class="pre-footer-slogan">
         <div class="container">
             <p>Life is in black and white. It's up to you to <button class="slogan-paint-btn">paint</button> the colours</p>
         </div>
     </div>
-
-    <!-- Footer -->
     <footer id="site-footer">
-        <!-- Animated background grid -->
         <div class="footer-bg-grid" aria-hidden="true"></div>
-
         <div class="container footer-inner">
-
-            <!-- TOP ROW: 4 columns -->
             <div class="footer-grid">
-
-                <!-- Col 1: About -->
                 <div class="footer-col footer-brand">
                     <a href="#home" class="footer-logo" aria-label="Back to top">
                         Bharath <span>Raj B</span>
                     </a>
                     <p class="footer-tagline">CSBS Student &amp; Full-Stack Developer</p>
                     <p class="footer-bio">Building scalable, cloud-ready applications with clean code and a passion for innovation.</p>
-                    <!-- Social Icons -->
                     <div class="footer-socials" role="list">
                         <a href="https://github.com/Bharath-B100" target="_blank" rel="noopener noreferrer"
                            class="footer-social-icon" aria-label="GitHub" role="listitem">
-                            <i class="fab fa-github"></i>
+                            <img src="assets/images/Gif/icons8-github.gif" alt="GitHub" style="width: 18px; height: 18px; filter: none !important; display: block;">
                         </a>
                         <a href="https://www.linkedin.com/in/bharath-raj143/" target="_blank" rel="noopener noreferrer"
                            class="footer-social-icon" aria-label="LinkedIn" role="listitem">
-                            <i class="fab fa-linkedin-in"></i>
+                            <img src="assets/images/Gif/icons8-linkedin.gif" alt="LinkedIn" style="width: 18px; height: 18px; filter: none !important; display: block;">
                         </a>
                         <a href="mailto:bharathrajmurali1010@gmail.com"
                            class="footer-social-icon" aria-label="Email" role="listitem">
-                            <i class="fas fa-envelope"></i>
+                            <img src="assets/images/Gif/icons8-mail.gif" alt="Mail" style="width: 18px; height: 18px; filter: none !important; display: block;">
                         </a>
                         <a href="https://leetcode.com/u/Bharath_Raj_B/" target="_blank" rel="noopener noreferrer"
                            class="footer-social-icon" aria-label="LeetCode" role="listitem">
-                            <i class="fas fa-code"></i>
+                            <img src="assets/images/Gif/icons8-code.gif" alt="Code" style="width: 18px; height: 18px; filter: none !important; display: block;">
                         </a>
                     </div>
                 </div>
-
-                <!-- Col 2: Quick Links -->
                 <nav class="footer-col footer-nav" aria-label="Quick links">
                     <h4 class="footer-col-title">Quick Links</h4>
                     <ul class="footer-link-list">
@@ -679,8 +605,6 @@
                         <li><a href="certifications.html"><i class="fas fa-chevron-right"></i>Certifications</a></li>
                     </ul>
                 </nav>
-
-                <!-- Col 3: Live Projects -->
                 <nav class="footer-col footer-projects" aria-label="Live projects">
                     <h4 class="footer-col-title">Live Projects</h4>
                     <ul class="footer-link-list">
@@ -706,44 +630,35 @@
                         </li>
                     </ul>
                 </nav>
-
-                <!-- Col 4: Contact -->
                 <div class="footer-col footer-contact-col">
                     <h4 class="footer-col-title">Get In Touch</h4>
                     <ul class="footer-contact-list">
                         <li>
                             <a href="mailto:bharathrajmurali1010@gmail.com" class="footer-contact-item">
-                                <span class="footer-contact-icon"><i class="fas fa-envelope"></i></span>
+                                <span class="footer-contact-icon"><img src="assets/images/Gif/icons8-mail.gif" alt="Mail" style="width: 14px; height: 14px; filter: none !important; display: block;"></span>
                                 <span>bharathrajmurali1010@gmail.com</span>
                             </a>
                         </li>
                         <li>
                             <a href="tel:+919943935576" class="footer-contact-item">
-                                <span class="footer-contact-icon"><i class="fas fa-phone"></i></span>
+                                <span class="footer-contact-icon"><img src="assets/images/Gif/icons8-phone.gif" alt="Phone" style="width: 14px; height: 14px; filter: none !important; display: block;"></span>
                                 <span>+91 99439 35576</span>
                             </a>
                         </li>
                         <li>
                             <a href="https://www.linkedin.com/in/bharath-raj143/" target="_blank" rel="noopener noreferrer" class="footer-contact-item">
-                                <span class="footer-contact-icon"><i class="fab fa-linkedin-in"></i></span>
+                                <span class="footer-contact-icon"><img src="assets/images/Gif/icons8-linkedin.gif" alt="LinkedIn" style="width: 14px; height: 14px; filter: none !important; display: block;"></span>
                                 <span>bharath-raj143</span>
                             </a>
                         </li>
                     </ul>
                 </div>
-
-            </div><!-- /.footer-grid -->
-
-            <!-- BOTTOM BAR -->
+            </div>
             <div class="footer-bottom-bar">
                 <p class="footer-copy">&copy; <span id="currentYear">2026</span> Bharath Raj B. All rights reserved.</p>
             </div>
-
-        </div><!-- /.footer-inner -->
+        </div>
     </footer>
-
-
-    <!-- Lightbox Modal -->
     <div class="lightbox" id="lightbox">
         <span class="lightbox-close" id="lightbox-close">&times;</span>
         <a href="assets/docs/Resume.pdf" download class="btn lightbox-download-btn" id="lightbox-download" style="display: none;">
@@ -754,11 +669,7 @@
             <img src="" alt="Resume Page 2" class="lightbox-content" id="lightbox-img-2" style="display: none;">
         </div>
     </div>
-
-    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="scripts/script.js"></script>
-
 </body>
-
 </html>
