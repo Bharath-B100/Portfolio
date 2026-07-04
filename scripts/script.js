@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     function animateCounterEl(el, targetText, delay = 0) {
+        const animId = Math.random().toString(36).substr(2, 9);
+        el.dataset.animId = animId;
         const numMatch = targetText.match(/\d+/);
         if (!numMatch) {
             el.textContent = targetText;
@@ -8,11 +10,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const targetNum = parseInt(numMatch[0], 10);
         const prefix = targetText.substring(0, numMatch.index);
         const suffix = targetText.substring(numMatch.index + numMatch[0].length);
-        const duration = 1000; // exactly 1 second
+        const duration = 1000;
         el.textContent = prefix + '0' + suffix;
         setTimeout(() => {
+            if (el.dataset.animId !== animId) return;
             let startTimestamp = null;
             const step = (timestamp) => {
+                if (el.dataset.animId !== animId) return;
                 if (!startTimestamp) startTimestamp = timestamp;
                 const progress = Math.min((timestamp - startTimestamp) / duration, 1);
                 const easeOut = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
@@ -26,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
             };
             window.requestAnimationFrame(step);
         }, delay);
-    } 
+    }  
     const statEls = [
         { id: 'leetcodeSolved',  value: '500+' },
         { id: 'hackerrankSolved', value: '100+' },
@@ -39,7 +43,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     const el = document.getElementById(s.id);
                     if (el) animateCounterEl(el, s.value, i * 200);
                 });
-                if (contestRatingEl) animateCounterEl(contestRatingEl, '1462', 400);
+                window.statsAnimated = true;
+                if (contestRatingEl) animateCounterEl(contestRatingEl, window.leetcodeRatingVal || '1462', 400);
                 odoObserver.disconnect();
             }
         });
@@ -90,24 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     const heroImage   = document.querySelector('.hero-image');
     const heroSection = document.querySelector('.hero');
-    let rafId = null;
-    if (heroImage && heroSection) {
-        heroSection.addEventListener('mousemove', e => {
-            if (rafId) cancelAnimationFrame(rafId);
-            rafId = requestAnimationFrame(() => {
-                const rect = heroSection.getBoundingClientRect();
-                const x = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
-                const y = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
-                heroImage.style.transform = `perspective(1000px) rotateX(${-y * 15}deg) rotateY(${x * 15}deg)`;
-            });
-        });
-        heroSection.addEventListener('mouseleave', () => {
-            if (rafId) cancelAnimationFrame(rafId);
-            heroImage.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
-            heroImage.style.transition = 'transform 0.5s ease-out';
-            setTimeout(() => { heroImage.style.transition = 'transform 0.1s ease-out'; }, 500);
-        });
-    }
+    // Hover animations removed as requested
     document.querySelectorAll('.badge').forEach(badge => {
         badge.addEventListener('mouseenter', () => badge.style.transform = 'scale(1.2)');
         badge.addEventListener('mouseleave', () => badge.style.transform = 'scale(1)');
@@ -287,6 +275,47 @@ document.addEventListener('DOMContentLoaded', function () {
             console.warn('GitHub API unavailable, using static fallback.', err);
         }
     })();
+    (async function fetchLeetCodeStats() {
+        const USERNAME = 'Bharath_Raj_B';
+        try {
+            const solvedRes = await fetch(`https://alfa-leetcode-api.onrender.com/${USERNAME}/solved`);
+            if (solvedRes.ok) {
+                const solvedData = await solvedRes.json();
+                if (solvedData.solvedProblem) {
+                    const leetcodeSolvedVal = solvedData.solvedProblem.toString() + '+';
+                    const solvedEl = document.getElementById('leetcodeSolved');
+                    if (solvedEl && solvedEl.textContent !== '500+') solvedEl.textContent = leetcodeSolvedVal;
+                    const solvedTextEl = document.getElementById('leetcodeSolvedText');
+                    if (solvedTextEl) solvedTextEl.textContent = leetcodeSolvedVal;
+                    
+                    if (window.statsAnimated) {
+                        if (solvedEl) animateCounterEl(solvedEl, leetcodeSolvedVal, 0);
+                    } else {
+                        const s = statEls.find(item => item.id === 'leetcodeSolved');
+                        if (s) s.value = leetcodeSolvedVal;
+                    }
+                }
+            }
+            const contestRes = await fetch(`https://alfa-leetcode-api.onrender.com/${USERNAME}/contest`);
+            if (contestRes.ok) {
+                const contestData = await contestRes.json();
+                if (contestData.contestRating) {
+                    const leetcodeRatingVal = Math.round(contestData.contestRating).toString();
+                    const contestRatingElLocal = document.getElementById('leetcodeRating');
+                    if (contestRatingElLocal && contestRatingElLocal.textContent !== '1462') contestRatingElLocal.textContent = leetcodeRatingVal;
+                    const ratingTextEl = document.getElementById('leetcodeRatingText');
+                    if (ratingTextEl) ratingTextEl.textContent = leetcodeRatingVal;
+                    window.leetcodeRatingVal = leetcodeRatingVal;
+                    if (window.statsAnimated) {
+                        const contestRatingElLocal2 = document.querySelector('.stat-card:nth-child(3) h6');
+                        if (contestRatingElLocal2) animateCounterEl(contestRatingElLocal2, leetcodeRatingVal, 0);
+                    }
+                }
+            }
+        } catch (err) {
+            console.warn('LeetCode API unavailable.', err);
+        }
+    })();
     const paintBtn = document.querySelector('.slogan-paint-btn');
     const profileImg = document.getElementById('profileImage');
     if (paintBtn) {
@@ -294,10 +323,10 @@ document.addEventListener('DOMContentLoaded', function () {
             document.body.classList.toggle('colorful-mode');
             if (document.body.classList.contains('colorful-mode')) {
                 paintBtn.textContent = 'clear';
-                if (profileImg) profileImg.src = 'assets/images/Colour_Image.JPG';
+                if (profileImg) profileImg.src = 'assets/images/ChatGPT_Image_Jul_4__2026__06_41_37_PM-removebg-preview_upscayl_5x_remacri-4x.png';
             } else {
                 paintBtn.textContent = 'paint';
-                if (profileImg) profileImg.src = 'assets/images/changed_silver.jpg';
+                if (profileImg) profileImg.src = 'assets/images/Bharath-PencilArt.png';
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
@@ -490,6 +519,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (viewResumeBtn && lightbox && lightboxImg) {
             viewResumeBtn.addEventListener('click', function(e) {
                 e.preventDefault();
+                lightboxImg.classList.remove('leetcode-card');
+                lightboxImg.style.filter = 'none';
                 lightboxImg.src = 'assets/images/Resume_page1.png';
                 if (lightboxImg2) {
                     lightboxImg2.src = 'assets/images/Resume_page2.png';
@@ -506,8 +537,57 @@ document.addEventListener('DOMContentLoaded', function () {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 if (lightbox && lightboxImg) {
+                    lightboxImg.classList.remove('leetcode-card');
+                    lightboxImg.style.filter = 'none';
                     lightboxImg.src = this.getAttribute('href');
                     if (lightboxImg2) lightboxImg2.style.display = 'none';
+                    if (lightboxDownload) lightboxDownload.style.display = 'none';
+                    lightbox.classList.add('active');
+                }
+            });
+        });
+        const leetcodeLinks = document.querySelectorAll('.leetcode-stats-link');
+        leetcodeLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (lightbox && lightboxImg) {
+                    lightboxImg.src = 'https://leetcard.jacoblin.cool/Bharath_Raj_B?theme=light&font=Chubbo&ext=heatmap';
+                    
+                    if (!document.body.classList.contains('colorful-mode')) {
+                        lightboxImg.style.filter = 'grayscale(100%)';
+                    } else {
+                        lightboxImg.style.filter = 'none';
+                    }
+                    
+                    lightboxImg.classList.add('leetcode-card');
+
+                    if (lightboxImg2) lightboxImg2.style.display = 'none';
+                    if (lightboxDownload) lightboxDownload.style.display = 'none';
+                    lightbox.classList.add('active');
+                }
+            });
+        });
+
+        const githubLinks = document.querySelectorAll('.github-stats-link');
+        githubLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (lightbox && lightboxImg) {
+                    const isBW = !document.body.classList.contains('colorful-mode');
+                    lightboxImg.src = 'https://streak-stats.demolab.com?user=Bharath-B100&hide_border=true&theme=default';
+                    lightboxImg.style.filter = isBW ? 'grayscale(100%)' : 'none';
+                    lightboxImg.classList.add('leetcode-card');
+
+                    if (lightboxImg2) {
+                        lightboxImg2.src = 'https://ghchart.rshah.org/Bharath-B100';
+                        lightboxImg2.style.filter = isBW ? 'grayscale(100%)' : 'none';
+                        lightboxImg2.style.display = 'block';
+                        lightboxImg2.style.marginTop = '20px';
+                        lightboxImg2.style.backgroundColor = '#fff';
+                        lightboxImg2.style.padding = '20px';
+                        lightboxImg2.style.borderRadius = '10px';
+                    }
+                    
                     if (lightboxDownload) lightboxDownload.style.display = 'none';
                     lightbox.classList.add('active');
                 }

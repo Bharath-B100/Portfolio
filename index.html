@@ -91,7 +91,7 @@
             </div>
             <div class="hero-image">
                 <div class="image-wrapper">
-                    <img src="assets/images/changed_silver.jpg" alt="Bharath Raj" id="profileImage">
+                    <img src="assets/images/Bharath-PencilArt.png" alt="Bharath Raj" id="profileImage" draggable="false" oncontextmenu="return false;">
                 </div>
                 <div class="achievement-badges">
                     <span class="badge" data-tooltip="LeetCode 500+ Problems">
@@ -215,12 +215,12 @@
                             <li>
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png"
                                     alt="LeetCode" class="achievement-icon" style="filter: grayscale(100%) brightness(0);" loading="lazy">
-                                LeetCode Contest Rating: 1462 | 500+ Problems Solved
+                                <span>LeetCode Contest Rating: <span id="leetcodeRatingText">1462</span> | <span id="leetcodeSolvedText">500+</span> Problems Solved</span>
                             </li>
                             <li>
                                 <img src="assets/images/hackerrank-bw-logo.png"
                                     alt="HackerRank" class="achievement-icon" loading="lazy">
-                                HackerRank: 100+ Problems Solved | 3+ Certificates
+                                <span>HackerRank: 100+ Problems Solved | 3+ Certificates</span>
                             </li>
                             <li>Vishwakarma Awards 2024: Top 6 Finalist among 3000+ teams</li>
                             <li>Paper Presentation Winner & Runner-up</li>
@@ -228,18 +228,22 @@
                         <div class="coding-stats">
                             <h5>Live Coding Stats</h5>
                             <div class="stats-grid">
-                                <div class="stat-card">
-                                    <h6 id="leetcodeSolved">500+</h6>
-                                    <p>LeetCode</p>
-                                </div>
+                                <a href="https://leetcode.com/u/Bharath_Raj_B/" class="stat-card-track leetcode-stats-link" style="text-decoration: none; color: inherit; display: block; cursor: pointer;">
+                                    <div class="stat-card" style="margin: 0; height: 100%; position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; border: none;">
+                                        <h6 id="leetcodeSolved">500+</h6>
+                                        <p>LeetCode</p>
+                                    </div>
+                                </a>
                                 <div class="stat-card">
                                     <h6 id="hackerrankSolved">100+</h6>
                                     <p>HackerRank</p>
                                 </div>
-                                <div class="stat-card">
-                                    <h6>1462</h6>
-                                    <p>Contest Rating</p>
-                                </div>
+                                <a href="https://github.com/Bharath-B100" class="stat-card-track github-stats-link" style="text-decoration: none; color: inherit; display: block; cursor: pointer;">
+                                    <div class="stat-card" style="margin: 0; height: 100%; position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; border: none;">
+                                        <h6 id="githubContributions">500+</h6>
+                                        <p>GitHub</p>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -524,7 +528,7 @@
                                 <img src="assets/images/Gif/icons8-github.gif"
                                     alt="GitHub" class="social-logo-img" loading="lazy" style="filter: none !important;">
                             </a>
-                            <a href="https://leetcode.com/u/Bharath_Raj_B/" target="_blank" class="social-icon">
+                            <a href="https://leetcode.com/u/Bharath_Raj_B/" target="_blank" class="social-icon leetcode-stats-link">
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png"
                                     alt="LeetCode" class="social-logo-img" loading="lazy">
                             </a>
@@ -588,8 +592,8 @@
                             <img src="assets/images/Gif/icons8-mail.gif" alt="Mail" style="width: 18px; height: 18px; filter: none !important; display: block;">
                         </a>
                         <a href="https://leetcode.com/u/Bharath_Raj_B/" target="_blank" rel="noopener noreferrer"
-                           class="footer-social-icon" aria-label="LeetCode" role="listitem">
-                            <img src="assets/images/Gif/icons8-code.gif" alt="Code" style="width: 18px; height: 18px; filter: none !important; display: block;">
+                           class="footer-social-icon leetcode-stats-link" aria-label="LeetCode" role="listitem">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png" alt="LeetCode" style="width: 18px; height: 18px; filter: invert(1) brightness(2); display: block;">
                         </a>
                     </div>
                 </div>
@@ -665,7 +669,7 @@
             <i class="fas fa-download"></i> Download Resume
         </a>
         <div class="lightbox-scroll-container" id="lightbox-scroll-container">
-            <img src="" alt="Resume Page 1" class="lightbox-content" id="lightbox-img">
+            <img src="" alt="" class="lightbox-content" id="lightbox-img">
             <img src="" alt="Resume Page 2" class="lightbox-content" id="lightbox-img-2" style="display: none;">
         </div>
     </div>

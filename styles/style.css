@@ -585,7 +585,7 @@ h1, h2, h3, h4, h5 {
 }
 .hero {
     min-height: 100vh;
-    padding: 180px 0 100px;
+    padding: 120px 0 100px;
     background: radial-gradient(circle at top left, rgba(0, 0, 0, 0.04) 0%, transparent 40%),
                 radial-gradient(circle at bottom right, rgba(0, 173, 181, 0.04) 0%, transparent 40%);
     position: relative;
@@ -610,6 +610,8 @@ h1, h2, h3, h4, h5 {
     gap: 50px;
     position: relative;
     z-index: 1;
+    flex-direction: row-reverse;
+    max-width: 1350px;
 }
 .hero-text {
     flex: 1;
@@ -699,38 +701,30 @@ h1, h2, h3, h4, h5 {
 .hero-image .image-wrapper {
     position: relative;
     width: clamp(200px, 45vw, 380px);
-    height: clamp(200px, 45vw, 380px);
-    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    height: auto;
     overflow: visible;
     margin-bottom: 35px;
-    animation: morphing 8s ease-in-out infinite, floatingVertical 6s ease-in-out infinite;
-    transform-origin: center;
     z-index: 2;
-}
-.hero-image .image-wrapper::before {
-    content: '';
-    position: absolute;
-    inset: -6px;
-    border-radius: inherit;
-    background: conic-gradient(
-        from 0deg,
-        var(--primary-color),
-        var(--secondary-color),
-        var(--primary-color)
-    );
-    z-index: -1;
-    animation: spinGradient 4s linear infinite;
-    opacity: 0.8;
 }
 .hero-image .image-wrapper img {
     position: relative;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: inherit;
+    height: auto;
+    object-fit: contain;
     z-index: 1;
-    border: 5px solid var(--card-light);
-    box-shadow: var(--shadow-lg);
+    mix-blend-mode: multiply;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%), linear-gradient(to bottom, black 80%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(to right, transparent 0%, black 20%), linear-gradient(to bottom, black 80%, transparent 100%);
+    mask-composite: intersect;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+body.dark-mode .hero-image .image-wrapper img, 
+.dark-mode .hero-image .image-wrapper img {
+    filter: invert(1) hue-rotate(180deg);
+    mix-blend-mode: screen;
 }
 @keyframes spinGradient {
     0% { transform: rotate(0deg); }
@@ -3225,3 +3219,74 @@ body.colorful-mode .skill-node.active {
     animation: none !important;
 }
 
+/* Custom Leetcode button style */
+.stat-card-track {
+    position: relative;
+    display: block;
+    border-radius: 11px;
+    padding: 3px;
+    overflow: hidden;
+    background: transparent;
+    box-shadow:
+        0 4px 18px rgba(0,0,0,0.14),
+        0 2px 5px  rgba(0,0,0,0.08);
+    transition:
+        transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.35s ease;
+}
+
+.stat-card-track::before {
+    content: '';
+    position: absolute;
+    width: 250%;
+    height: 350%;
+    top: -125%;
+    left: -75%;
+    animation: silver-spin 2.8s linear infinite;
+    background: conic-gradient(
+        from 0deg,
+        #ffffff   0deg,
+        #e0e0e5  30deg,
+        #c0c0c8  60deg,
+        #909098  95deg,
+        #606068 130deg,
+        #3c3c44 160deg,
+        #606068 195deg,
+        #909098 225deg,
+        #c0c0c8 260deg,
+        #e0e0e5 295deg,
+        #ffffff 330deg,
+        #e8e8ee 355deg,
+        #ffffff 360deg
+    );
+    z-index: 0;
+}
+
+.stat-card-track:hover {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow:
+        0 10px 32px rgba(0,0,0,0.18),
+        0 4px 10px rgba(0,0,0,0.10);
+}
+
+.stat-card-track:active {
+    transform: scale(0.95);
+    box-shadow:
+        0 2px 6px rgba(0,0,0,0.10);
+}
+
+.stat-card-btn-inner {
+    background: linear-gradient(175deg, #ffffff 0%, #f2f2f6 50%, #e8e8ee 100%) !important;
+    box-shadow: inset 0 1.5px 3px rgba(255,255,255,1.0), inset 0 -1px 2px rgba(0,0,0,0.10);
+}
+body.colorful-mode .stat-card-btn-inner {
+    background: var(--card-light) !important;
+}
+
+/* LeetCode Lightbox specific sizing for better visibility */
+.lightbox-content.leetcode-card {
+    width: 80vw !important;
+    max-width: 900px !important;
+    background: #ffffff;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease, filter 0.4s ease;
+}
