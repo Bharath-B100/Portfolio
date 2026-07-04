@@ -20,6 +20,39 @@
         rel="stylesheet">
 </head>
 <body>
+    <div id="website-preloader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #EEEEEE; z-index: 999999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: clip-path 2.5s cubic-bezier(0.65, 0, 0.35, 1), opacity 2.5s ease-in-out; clip-path: circle(150% at 50% 50%); opacity: 1; gap: 20px;">
+        <style>
+            @keyframes smooth-bounce {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-3px); }
+            }
+            .shaking-dots {
+                display: inline-block;
+                animation: smooth-bounce 1.5s ease-in-out infinite;
+                margin-left: 2px;
+            }
+        </style>
+        <img id="loader-gif" src="assets/images/Gif/From Klickpin.com- Practical tailoring ideas for boards that feel current and for busy days for everyday tailoring joy-pin-id-122300946109626948.gif" alt="Loading..." style="max-width: 90%; max-height: 80%; object-fit: contain;">
+        <div style="text-align: center;">
+            <p style="color: #000000; font-weight: 600; font-size: 1.5rem; margin: 0 0 10px 0; letter-spacing: 1px;">Loading<span class="shaking-dots">...</span></p>
+            <p style="color: #000000; font-weight: bold; font-family: 'Quicksand', sans-serif; font-size: 1.2rem; letter-spacing: 2px; margin: 0;">ᴜꜱᴇ ꜰᴜʟʟ ꜱᴄʀᴇᴇɴ ꜰᴏʀ ʙᴇꜱᴛ ᴇxᴘᴇʀɪᴇɴᴄᴇ</p>
+        </div>
+    </div>
+    <script>
+        setTimeout(() => {
+            const preloader = document.getElementById('website-preloader');
+            if (preloader) {
+                // Trigger both clip-path collapse and fade-out simultaneously (2.5s)
+                preloader.style.clipPath = 'circle(0% at 50% 50%)';
+                preloader.style.opacity = '0';
+
+                // Remove from DOM exactly when the 2.5s transitions finish
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 2500);
+            }
+        }, 4500); // Show loading screen for 4.5 seconds
+    </script>
     <svg width="0" height="0" style="position: absolute; width: 0; height: 0; overflow: hidden; pointer-events: none;">
         <filter id="electric-noise">
             <feTurbulence type="fractalNoise" baseFrequency="0.04 0.15" numOctaves="3" result="noise"/>
