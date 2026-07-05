@@ -39,19 +39,34 @@
         </div>
     </div>
     <script>
-        setTimeout(() => {
-            const preloader = document.getElementById('website-preloader');
-            if (preloader) {
-                // Trigger both clip-path collapse and fade-out simultaneously (2.5s)
-                preloader.style.clipPath = 'circle(0% at 50% 50%)';
-                preloader.style.opacity = '0';
-
-                // Remove from DOM exactly when the 2.5s transitions finish
-                setTimeout(() => {
-                    preloader.style.display = 'none';
-                }, 2500);
+        const preloader = document.getElementById('website-preloader');
+        if (preloader) {
+            let isReload = false;
+            const navEntries = performance.getEntriesByType("navigation");
+            if (navEntries.length > 0 && navEntries[0].type === "reload") {
+                isReload = true;
+            } else if (window.performance && window.performance.navigation && window.performance.navigation.type === 1) {
+                isReload = true;
             }
-        }, 4500); // Show loading screen for 4.5 seconds
+
+            const hasVisited = sessionStorage.getItem('portfolio_visited');
+
+            if (isReload || !hasVisited) {
+                sessionStorage.setItem('portfolio_visited', 'true');
+                setTimeout(() => {
+                    // Trigger both clip-path collapse and fade-out simultaneously (2.5s)
+                    preloader.style.clipPath = 'circle(0% at 50% 50%)';
+                    preloader.style.opacity = '0';
+
+                    // Remove from DOM exactly when the 2.5s transitions finish
+                    setTimeout(() => {
+                        preloader.style.display = 'none';
+                    }, 2500);
+                }, 4500); // Show loading screen for 4.5 seconds
+            } else {
+                preloader.style.display = 'none';
+            }
+        }
     </script>
     <svg width="0" height="0" style="position: absolute; width: 0; height: 0; overflow: hidden; pointer-events: none;">
         <filter id="electric-noise">
@@ -603,6 +618,9 @@
     </div>
     <footer id="site-footer">
         <div class="footer-bg-grid" aria-hidden="true"></div>
+        <div class="footer-coin-wrapper" aria-hidden="true">
+            <img src="assets/images/favicon_cropped.png" alt="BR Logo" class="footer-br-logo">
+        </div>
         <div class="container footer-inner">
             <div class="footer-grid">
                 <div class="footer-col footer-brand">

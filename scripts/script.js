@@ -516,13 +516,23 @@ document.addEventListener('DOMContentLoaded', function () {
         const lightboxImg2 = document.getElementById('lightbox-img-2');
         const lightboxClose = document.getElementById('lightbox-close');
         const lightboxDownload = document.getElementById('lightbox-download');
+        
+        function prepareLightboxImage(imgEl) {
+            if (!imgEl) return;
+            imgEl.style.opacity = '0';
+            imgEl.onload = function() { imgEl.style.opacity = '1'; };
+            imgEl.onerror = function() { imgEl.style.opacity = '1'; };
+        }
+
         if (viewResumeBtn && lightbox && lightboxImg) {
             viewResumeBtn.addEventListener('click', function(e) {
                 e.preventDefault();
+                prepareLightboxImage(lightboxImg);
                 lightboxImg.classList.remove('leetcode-card');
                 lightboxImg.style.filter = 'none';
                 lightboxImg.src = 'assets/images/Resume_page1.png';
                 if (lightboxImg2) {
+                    prepareLightboxImage(lightboxImg2);
                     lightboxImg2.src = 'assets/images/Resume_page2.png';
                     lightboxImg2.style.display = 'block';
                 }
@@ -537,6 +547,7 @@ document.addEventListener('DOMContentLoaded', function () {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 if (lightbox && lightboxImg) {
+                    prepareLightboxImage(lightboxImg);
                     lightboxImg.classList.remove('leetcode-card');
                     lightboxImg.style.filter = 'none';
                     lightboxImg.src = this.getAttribute('href');
@@ -551,6 +562,7 @@ document.addEventListener('DOMContentLoaded', function () {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 if (lightbox && lightboxImg) {
+                    prepareLightboxImage(lightboxImg);
                     lightboxImg.src = 'https://leetcard.jacoblin.cool/Bharath_Raj_B?theme=light&font=Chubbo&ext=heatmap';
                     
                     if (!document.body.classList.contains('colorful-mode')) {
@@ -573,12 +585,14 @@ document.addEventListener('DOMContentLoaded', function () {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 if (lightbox && lightboxImg) {
+                    prepareLightboxImage(lightboxImg);
                     const isBW = !document.body.classList.contains('colorful-mode');
                     lightboxImg.src = 'https://streak-stats.demolab.com?user=Bharath-B100&hide_border=true&theme=default';
                     lightboxImg.style.filter = isBW ? 'grayscale(100%)' : 'none';
                     lightboxImg.classList.add('leetcode-card');
 
                     if (lightboxImg2) {
+                        prepareLightboxImage(lightboxImg2);
                         lightboxImg2.src = 'https://ghchart.rshah.org/Bharath-B100';
                         lightboxImg2.style.filter = isBW ? 'grayscale(100%)' : 'none';
                         lightboxImg2.style.display = 'block';

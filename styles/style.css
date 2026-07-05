@@ -104,6 +104,10 @@ body.colorful-mode #navbar .nav-container {
 body.colorful-mode .dark-section {
     background-color: var(--section-dark) !important;
 }
+body.colorful-mode #testimonials,
+body.colorful-mode #about {
+    background: radial-gradient(circle at 0% 0%, #ffffff 0%, #f0f0f5 50%, #e4e4ea 100%) !important;
+}
 body.colorful-mode .stat-card h6,
 body.colorful-mode .exp-header h3,
 body.colorful-mode .exp-header .company,
@@ -3260,6 +3264,25 @@ body.colorful-mode .skill-node.active {
         #ffffff 360deg
     );
     z-index: 0;
+}
+.footer-coin-wrapper {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+.footer-br-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: auto;
+    opacity: 0.15;
 }
 
 .stat-card-track:hover {
