@@ -636,3 +636,21 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     })();
 
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const scrollElements = document.querySelectorAll('.project-card, .case-section, .about-text, .experience-card, .testimonial');
+    const scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('scroll-visible');
+            } else {
+                entry.target.classList.remove('scroll-visible');
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+    scrollElements.forEach(el => {
+        el.classList.add('scroll-animate');
+        scrollObserver.observe(el);
+    });
+});

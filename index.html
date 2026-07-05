@@ -18,6 +18,26 @@
     <link href="https://api.fontshare.com/v2/css?f[]=chubbo&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+    <link rel="preload" as="image" href="assets/images/ChatGPT_Image_Jul_4__2026__06_41_37_PM-removebg-preview_upscayl_5x_remacri-4x.png">
+    <style>
+        html.hide-preloader #website-preloader { display: none !important; }
+    </style>
+    <script>
+        (function() {
+            let isReload = false;
+            try {
+                const navEntries = performance.getEntriesByType("navigation");
+                if (navEntries.length > 0 && navEntries[0].type === "reload") {
+                    isReload = true;
+                } else if (window.performance && window.performance.navigation && window.performance.navigation.type === 1) {
+                    isReload = true;
+                }
+            } catch(e) {}
+            if (!isReload && sessionStorage.getItem('portfolio_visited')) {
+                document.documentElement.classList.add('hide-preloader');
+            }
+        })();
+    </script>
 </head>
 <body>
     <div id="website-preloader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #EEEEEE; z-index: 999999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: clip-path 2.5s cubic-bezier(0.65, 0, 0.35, 1), opacity 2.5s ease-in-out; clip-path: circle(150% at 50% 50%); opacity: 1; gap: 20px;">

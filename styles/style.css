@@ -3284,6 +3284,10 @@ body.colorful-mode .skill-node.active {
     height: auto;
     opacity: 0.15;
 }
+body.colorful-mode .footer-br-logo {
+    filter: brightness(0);
+    opacity: 0.08;
+}
 
 .stat-card-track:hover {
     transform: translateY(-2px) scale(1.04);
@@ -3313,3 +3317,7 @@ body.colorful-mode .stat-card-btn-inner {
     background: #ffffff;
     transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease, filter 0.4s ease;
 }
+
+.scroll-animate { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out, background-color 0.8s ease, color 0.8s ease; }
+.scroll-animate.scroll-visible { opacity: 1; transform: translateY(0); }
+.projects-container .project-card.scroll-animate { transition-delay: 0s; } /* Override default delay for smooth intersection */
