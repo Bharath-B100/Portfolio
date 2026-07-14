@@ -1,5 +1,13 @@
 @import url('https://api.fontshare.com/v2/css?f[]=chubbo&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+@font-face {
+    font-family: 'Hendrickson';
+    src: url('../Hendrickson-K7GOD.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 :root {
     --primary-color: var(--text-light);
     --primary-hover: #000000;
@@ -1974,7 +1982,7 @@ footer a, footer button, footer .btn {
 .footer-bottom-bar {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     padding: 18px 0;
 }
 .footer-copy,
@@ -1983,6 +1991,61 @@ footer a, footer button, footer .btn {
     color: rgba(255,255,255,0.25);
     margin: 0;
     line-height: 1;
+}
+.footer-signature {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0;
+    gap: 2px;
+}
+.sig-prefix {
+    font-size: 0.35rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: rgba(255, 255, 255, 0.35);
+    font-weight: 600;
+    transition: var(--transition);
+    line-height: 1;
+}
+.footer-signature:hover .sig-prefix {
+    color: rgba(255, 255, 255, 0.65);
+}
+.sig-name {
+    font-family: 'Hendrickson', cursive, sans-serif;
+    font-size: 3.2rem;
+    color: rgba(255, 255, 255, 0.8);
+    transition: var(--transition);
+    line-height: 1;
+    transform-origin: left center;
+}
+.footer-signature:hover .sig-name {
+    color: #ffffff;
+    transform: scale(1.05);
+}
+body:not(.dark-mode) footer:not(#site-footer) .sig-prefix {
+    color: rgba(0, 0, 0, 0.4);
+}
+body:not(.dark-mode) footer:not(#site-footer) .footer-signature:hover .sig-prefix {
+    color: rgba(0, 0, 0, 0.65);
+}
+body:not(.dark-mode) footer:not(#site-footer) .sig-name {
+    color: rgba(0, 0, 0, 0.75);
+}
+body:not(.dark-mode) footer:not(#site-footer) .footer-signature:hover .sig-name {
+    color: rgba(0, 0, 0, 0.95);
+}
+body.colorful-mode .sig-prefix {
+    color: var(--text-muted-light) !important;
+}
+body.colorful-mode .footer-signature:hover .sig-prefix {
+    color: var(--text-light) !important;
+}
+body.colorful-mode .sig-name {
+    color: var(--text-light) !important;
+}
+body.colorful-mode .footer-signature:hover .sig-name {
+    color: var(--primary-color) !important;
 }
 .footer-heart {
     color: rgba(240,80,80,0.75);
@@ -2168,6 +2231,8 @@ img {
     .footer-brand { grid-column: 1 / -1; }
     .footer-bio { max-width: 100%; }
     .footer-bottom-bar { flex-direction: column; align-items: center; text-align: center; gap: 6px; }
+    .footer-signature { align-items: center; }
+    .sig-name { transform-origin: center center; }
     .achievement-badges { gap: 12px; }
     .badge { width: 42px; height: 42px; font-size: 1.1rem; }
     .social-links { flex-direction: column; align-items: flex-start; gap: 10px; }
@@ -3280,9 +3345,12 @@ body.colorful-mode .skill-node.active {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 150px;
+    width: 90px;
     height: auto;
     opacity: 0.15;
+}
+.home-page .footer-br-logo {
+    width: 175px;
 }
 body.colorful-mode .footer-br-logo {
     filter: brightness(0);

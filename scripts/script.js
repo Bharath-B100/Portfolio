@@ -563,7 +563,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 e.preventDefault();
                 if (lightbox && lightboxImg) {
                     prepareLightboxImage(lightboxImg);
-                    lightboxImg.src = 'https://leetcard.jacoblin.cool/Bharath_Raj_B?theme=light&font=Chubbo&ext=heatmap';
+                    lightboxImg.src = 'https://leetcard.jacoblin.cool/Bharath_Raj_B?theme=light&font=Playfair%20Display&ext=heatmap';
                     
                     if (!document.body.classList.contains('colorful-mode')) {
                         lightboxImg.style.filter = 'grayscale(100%)';
