@@ -57,6 +57,7 @@
             align-items: center;
             justify-content: center;
             padding: 15px;
+            min-height: 250px;
         }
         .dark-mode .cert-card {
             border-color: var(--border-dark);
@@ -201,7 +202,7 @@
             const fadeElements = document.querySelectorAll('.fade-up, .scale-in');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-            }, { threshold: 0.1 });
+            }, { threshold: 0.01 });
             fadeElements.forEach(el => observer.observe(el));
 
             // Lightbox functionality
