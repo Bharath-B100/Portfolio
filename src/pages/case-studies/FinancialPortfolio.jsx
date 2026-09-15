@@ -43,8 +43,7 @@ export default function FinancialPortfolio() {
             </div>
             
             <div className="hero-btns" style={{justifyContent: "center", marginTop: "40px"}}>
-                <span className="btn-track"><a href="#" className="btn primary-btn"><i className="fas fa-external-link-alt"></i> Live Demo</a></span>
-                <span className="btn-track"><a href="https://github.com/Bharath-B100/Financial_portfolio" target="_blank" className="btn secondary-btn"><i className="fab fa-github"></i> GitHub Repo</a></span>
+                <span className="btn-track"><a href="https://github.com/Bharath-B100/Financial_portfolio" target="_blank" rel="noopener noreferrer" className="btn secondary-btn"><i className="fab fa-github"></i> GitHub Repo</a></span>
             </div>
         </div>
 
