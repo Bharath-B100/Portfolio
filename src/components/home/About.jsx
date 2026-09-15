@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function About({ openLightbox }) {
-  const [leetcodeSolved, setLeetcodeSolved] = useState('541+');
+  const [leetcodeSolved, setLeetcodeSolved] = useState('—');
   const [leetcodeRating, setLeetcodeRating] = useState('1439');
   const [hackerrankSolved] = useState('100+');
+  const [githubCommits, setGithubCommits] = useState('—');
 
   useEffect(() => {
     const USERNAME = 'Bharath_Raj_B';
@@ -39,6 +40,31 @@ export default function About({ openLightbox }) {
       })
       .catch(err => {
         console.warn('LeetCode Contest API fallback:', err);
+      });
+    // Fetch GitHub public commit count via contribution calendar (approximate)
+    fetch('https://api.github.com/users/Bharath-B100/repos?per_page=100&type=owner')
+      .then(res => {
+        if (res.ok) return res.json();
+        throw new Error('GitHub Repos API error');
+      })
+      .then(repos => {
+        const total = repos.reduce((sum, r) => sum + (r.size > 0 ? 1 : 0), 0);
+        // Use total stars + forks as a proxy metric shown as repos count
+        const commitProxy = repos.length;
+        return fetch('https://api.github.com/search/commits?q=author:Bharath-B100', {
+          headers: { Accept: 'application/vnd.github.cloak-preview+json' }
+        }).then(r => r.ok ? r.json() : null).then(data => {
+          if (data && data.total_count) {
+            setGithubCommits(data.total_count.toLocaleString() + '+');
+          } else {
+            // Fallback: show public repo count
+            setGithubCommits(commitProxy + '+ repos');
+          }
+        });
+      })
+      .catch(err => {
+        console.warn('GitHub API fallback:', err);
+        setGithubCommits('500+');
       });
   }, []);
 
@@ -163,7 +189,7 @@ export default function About({ openLightbox }) {
                             <li>Paper Presentation Winner & Runner-up</li>
                         </ul>
                         <div className="coding-stats">
-                            <h5>Live Coding Stats</h5>
+                            <h5>Coding Stats</h5>
                             <div className="stats-grid">
                                 <a href="https://leetcode.com/u/Bharath_Raj_B/" className="stat-card-track leetcode-stats-link" onClick={(e) => { e.preventDefault(); openLightbox({ image1: "https://leetcard.jacoblin.cool/Bharath_Raj_B?theme=light&font=Playfair%20Display&ext=heatmap", isLeetCode: true, filter: (document.body.classList.contains("dark-mode") || !document.body.classList.contains("colorful-mode")) ? "grayscale(100%)" : "none" }); }} style={{textDecoration: "none", color: "inherit", display: "block", cursor: "pointer"}}>
                                     <div className="stat-card" style={{margin: "0", height: "100%", position: "relative", zIndex: "1", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", border: "none"}}>
@@ -177,7 +203,7 @@ export default function About({ openLightbox }) {
                                 </div>
                                 <a href="https://github.com/Bharath-B100" className="stat-card-track github-stats-link" onClick={(e) => { e.preventDefault(); openLightbox({ image1: "https://streak-stats.demolab.com?user=Bharath-B100&hide_border=true&theme=default", image2: "https://ghchart.rshah.org/Bharath-B100", isGitHub: true, filter: (document.body.classList.contains("dark-mode") || !document.body.classList.contains("colorful-mode") && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "grayscale(100%)" : "none" }); }} style={{textDecoration: "none", color: "inherit", display: "block", cursor: "pointer"}}>
                                     <div className="stat-card" style={{margin: "0", height: "100%", position: "relative", zIndex: "1", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", border: "none"}}>
-                                        <h6 id="githubContributions">500+</h6>
+                                        <h6 id="githubContributions">{githubCommits}</h6>
                                         <p>GitHub</p>
                                     </div>
                                 </a>

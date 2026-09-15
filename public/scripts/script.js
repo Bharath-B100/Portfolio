@@ -62,7 +62,6 @@ window.toggleSkills = function(category) {
         }
 
         const statEls = [
-            { id: 'leetcodeSolved',  value: '541+' },
             { id: 'hackerrankSolved', value: '100+' },
         ];
         const contestRatingEl = document.querySelector('.stat-card:nth-child(3) h6');

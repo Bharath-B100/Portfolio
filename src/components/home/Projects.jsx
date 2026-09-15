@@ -48,7 +48,7 @@ const projectsData = [
   },
   {
     title: 'DYD-Cloths (E-commerce)',
-    date: '2026',
+    date: '2025',
     description: 'DYD-Cloths (Design Your Dream Cloths) is a full-stack custom T-shirt e-commerce platform with a Fabric.js-powered design studio',
     bullets: [
       'Built an interactive design studio using Fabric.js, enabling real-time T-shirt customization with text, images, and shapes',
@@ -59,7 +59,7 @@ const projectsData = [
   },
   {
     title: 'Traveloop',
-    date: '2026',
+    date: '2025',
     description: 'Traveloop is a personalized travel planning application for creating and managing multi-city itineraries with ease',
     bullets: [
       'Implemented trip customization, activity discovery, budget estimation, packing checklists, and itinerary sharing features',

@@ -1,40 +1,40 @@
-# Bharath Raj B ‚Äî Portfolio
+# Bharath Raj B ó Portfolio
 
-A premium, Apple-inspired portfolio website showcasing my projects, skills, and experience as a Full-Stack Developer & IoT Engineer.
+A premium, Apple-inspired portfolio website built with **React + Vite**, showcasing my projects, skills, and experience as a Full-Stack Developer & IoT Engineer.
 
-## üåê Live Demo
+## ?? Live Demo
 
-**üîó [https://bharathraj-portfolio.vercel.app](https://bharathraj-portfolio.vercel.app)**
+**?? [https://bharathraj-portfolio.vercel.app](https://bharathraj-portfolio.vercel.app)**
 
 ---
 
-## ‚ú® Features
+## ? Features
 
 ### Design & UI
-- **Apple-Inspired Minimalist Design** ‚Äî Clean white aesthetic with deep black typography
-- **Fully Responsive** ‚Äî Optimized for Mobile, Tablet, and Desktop (all breakpoints covered)
-- **Custom Cursor** ‚Äî Premium custom pointer that adapts to context (dark/light sections)
-- **Page Transitions** ‚Äî Smooth fade overlay between pages for a native app feel
+- **Apple-Inspired Minimalist Design** ó Clean white aesthetic with deep black typography
+- **Fully Responsive** ó Optimized for Mobile, Tablet, and Desktop (all breakpoints covered)
+- **Custom Cursor** ó Premium custom pointer that adapts to context (dark/light sections)
+- **Page Transitions** ó Smooth fade overlay between pages for a native app feel
 
 ### Animations & Interactions
-- **Liquid Silver Hover Animation** ‚Äî Fluid left-to-right silver fill on all skill tags, project tech tags, and case study tags
-- **Spinning Silver Ring** ‚Äî Animated chrome ring on all CTA buttons
-- **Scroll-Driven Snake Timeline** ‚Äî SVG snake path that draws itself as you scroll through "My Journey"
-- **3D Hero Image Tilt** ‚Äî Perspective tilt effect on the profile image following mouse movement
-- **Odometer Counter** ‚Äî Slot-machine style number animation for coding stats
-- **Scroll Reveal** ‚Äî 3D cascade entrance animations for all sections
+- **Liquid Silver Hover Animation** ó Fluid left-to-right silver fill on all skill tags, project tech tags, and case study tags
+- **Spinning Silver Ring** ó Animated chrome ring on all CTA buttons
+- **Scroll-Driven Snake Timeline** ó SVG snake path that draws itself as you scroll through "My Journey"
+- **3D Hero Image Tilt** ó Perspective tilt effect on the profile image following mouse movement
+- **Odometer Counter** ó Slot-machine style number animation for coding stats
+- **Scroll Reveal** ó 3D cascade entrance animations for all sections
 
 ### Sections
-- **Hero** ‚Äî Animated introduction with particles background and achievement badges
-- **About** ‚Äî Education timeline with animated snake path, certifications, contact info
-- **Experience** ‚Äî UI/UX Internship at Sri Nandha Infotech with detailed bullet points
-- **Projects** ‚Äî 6 project cards with tech tags, hover effects, and case study links
-- **Skills** ‚Äî Categorized skill tags with liquid silver hover animation
-- **Contact** ‚Äî Contact form (Formspree) with live GitHub API stats
-- **Footer** ‚Äî Quick links, social icons, contact details
+- **Hero** ó Animated introduction with particles background and achievement badges
+- **About** ó Education timeline with animated snake path, certifications, contact info, and live API-fetched coding stats
+- **Experience** ó UI/UX Internship at Sri Nandha Infotech with detailed bullet points
+- **Projects** ó 6 project cards with tech tags, hover effects, and case study links
+- **Skills** ó Categorized skill tags with liquid silver hover animation
+- **Contact** ó Contact form (Formspree) with GitHub activity stats
+- **Footer** ó Quick links, social icons, contact details
 
 ### Project Case Studies
-Each project has a dedicated case study page with:
+Each project has a dedicated React page with:
 - Project overview and problem statement
 - Technical approach and architecture
 - Live demo and GitHub repo links
@@ -42,83 +42,120 @@ Each project has a dedicated case study page with:
 
 ---
 
-## üõ†Ô∏è Tech Stack
+## ??? Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
-| **Structure** | HTML5, Semantic Markup |
+| **Framework** | React 18 (JSX, Hooks) |
+| **Build Tool** | Vite |
+| **Routing** | React Router DOM v6 |
 | **Styling** | Vanilla CSS3 (Custom Properties, Grid, Flexbox) |
 | **Animations** | CSS Keyframes, SVG stroke-dashoffset, cubic-bezier transitions |
-| **Interactivity** | Vanilla JavaScript (ES6+) |
 | **Icons** | Font Awesome 6 |
-| **Particles** | Particles.js |
 | **Form** | Formspree API |
-| **Live Stats** | GitHub REST API |
+| **Live Stats** | LeetCode API (alfa-leetcode-api), GitHub REST API |
 
 ---
 
-## üìÅ Project Structure
+## ?? Project Structure
 
 ```
 Portfolio/
-‚îú‚îÄ‚îÄ index.html                    # Main portfolio page
-‚îú‚îÄ‚îÄ styles/
-‚îÇ   ‚îî‚îÄ‚îÄ style.css                 # All styles + responsive breakpoints
-‚îú‚îÄ‚îÄ scripts/
-‚îÇ   ‚îî‚îÄ‚îÄ script.js                 # All interactions + SVG snake animation
-‚îú‚îÄ‚îÄ case-studies/
-‚îÇ   ‚îú‚îÄ‚îÄ hostel-management.html    # Smart Hostel case study
-‚îÇ   ‚îú‚îÄ‚îÄ smart-spending.html       # Smart Spending Analysis
-‚îÇ   ‚îú‚îÄ‚îÄ financial-portfolio.html  # Financial Portfolio Tracker
-‚îÇ   ‚îú‚îÄ‚îÄ dyd-cloths.html           # DYD Cloths E-commerce
-‚îÇ   ‚îú‚îÄ‚îÄ smart-shoe.html           # Smart Shoe IoT
-‚îÇ   ‚îî‚îÄ‚îÄ traveloop.html            # Traveloop App
-‚îî‚îÄ‚îÄ assets/
-    ‚îú‚îÄ‚îÄ images/                   # Profile photo, cursors, project screenshots
-    ‚îî‚îÄ‚îÄ docs/
-        ‚îî‚îÄ‚îÄ Resume.pdf            # Downloadable resume
++-- index.html                    # Vite HTML entry point
++-- vite.config.js                # Vite configuration
++-- package.json
++-- public/
+¶   +-- assets/
+¶   ¶   +-- images/               # Profile photo, cursors, project screenshots
+¶   ¶   +-- docs/
+¶   ¶       +-- Resume.pdf        # Downloadable resume
+¶   +-- scripts/
+¶       +-- script.js             # Supplemental vanilla JS (scroll animations, etc.)
++-- src/
+    +-- main.jsx                  # React entry ó mounts App
+    +-- App.jsx                   # Root component with React Router routes
+    +-- components/
+    ¶   +-- Preloader.jsx         # Lightweight entrance preloader (~1.2 s)
+    ¶   +-- Navbar.jsx
+    ¶   +-- Footer.jsx
+    ¶   +-- Lightbox.jsx
+    ¶   +-- PageTransitionOverlay.jsx
+    ¶   +-- home/                 # Single-page section components
+    ¶       +-- Home.jsx          # Hero section
+    ¶       +-- About.jsx         # About + coding stats (LeetCode & GitHub API)
+    ¶       +-- Experience.jsx
+    ¶       +-- Projects.jsx      # Project cards (centralized data array)
+    ¶       +-- Skills.jsx
+    ¶       +-- Testimonials.jsx
+    ¶       +-- Contact.jsx
+    +-- pages/
+    ¶   +-- Home.jsx              # Assembles all home sections
+    ¶   +-- CertificationsPage.jsx
+    ¶   +-- case-studies/        # Individual project deep-dives
+    ¶       +-- SmartSpending.jsx
+    ¶       +-- FinancialPortfolio.jsx
+    ¶       +-- HostelManagement.jsx
+    ¶       +-- SmartShoe.jsx
+    ¶       +-- DydCloths.jsx
+    ¶       +-- Traveloop.jsx
+    +-- styles/                  # Global and component CSS
 ```
 
 ---
 
-## üöÄ Projects Featured
+## ?? Getting Started
 
-| Project | Tech | Links |
-|---------|------|-------|
-| **Smart Hostel Management** | MongoDB, Express, React, Node.js | [Live](https://tinyurl.com/SMART-HOSTEL) ¬∑ [GitHub](https://github.com/Bharath-B100/Smart-hostel) |
-| **Smart Spending Analysis** | Python, Pandas, Power BI | ‚Äî |
-| **Financial Portfolio Tracker** | Python, Pandas, yfinance | [GitHub](https://github.com/Bharath-B100/Financial_portfolio) |
-| **DYD Cloths** | React, Node.js, MongoDB | [GitHub](https://github.com/Bharath-B100/DYD-Cloths) |
-| **Smart Shoe** | Arduino, IoT, Embedded C | ‚Äî |
-| **Traveloop** | React, Node.js, Maps API | [GitHub](https://github.com/Bharath-B100/Traveloop) |
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+```
 
 ---
 
-## üì± Responsive Breakpoints
+## ?? Projects Featured
+
+| Project | Year | Tech | Links |
+|---------|------|------|-------|
+| **Smart Hostel Management** | 2024 | MongoDB, Express, React, Node.js | [Live](https://tinyurl.com/SMART-HOSTEL) ∑ [GitHub](https://github.com/Bharath-B100/Smart-hostel) |
+| **Smart Spending Analysis** | 2025 | Python, Pandas, Power BI | ó |
+| **Financial Portfolio Tracker** | 2025 | React, Flask, PostgreSQL | [GitHub](https://github.com/Bharath-B100/Financial_portfolio) |
+| **DYD Cloths** | 2025 | Fabric.js, Node.js, MongoDB, Razorpay | [Live](https://dyd-cloths.onrender.com) ∑ [GitHub](https://github.com/Bharath-B100/DYD-Cloths) |
+| **Smart Shoe** | 2024 | Arduino, IoT, Embedded C | ó |
+| **Traveloop** | 2025 | React, Node.js, PostgreSQL, Supabase | [Live](https://traveloop-mtz2.onrender.com/) ∑ [GitHub](https://github.com/Bharath-B100/Traveloop) |
+
+---
+
+## ?? Responsive Breakpoints
 
 | Breakpoint | Target |
 |-----------|--------|
-| `‚â§ 1024px` | Tablets |
-| `‚â§ 768px` | Mobile / Small Tablet |
-| `‚â§ 576px` | Portrait Mobile |
-| `‚â§ 480px` | Small Phone |
-| `‚â§ 375px` | iPhone SE / Extra Small |
+| <= 1024px | Tablets |
+| <= 768px  | Mobile / Small Tablet |
+| <= 576px  | Portrait Mobile |
+| <= 480px  | Small Phone |
+| <= 375px  | iPhone SE / Extra Small |
 
 ---
 
-## üë§ About Me
+## ?? About Me
 
-**Bharath Raj B** ‚Äî B.Tech CSBS Student at Dr.N.G.P Institute Of Technology (2023‚Äì2027)
+**Bharath Raj B** ó B.Tech CSBS Student at Dr.N.G.P Institute Of Technology (2023ñ2027)
 
-- üìç Coimbatore, India
-- üìß bharathrajmurali1010@gmail.com
-- üì± +91 9943935576
-- üîó [LinkedIn](https://www.linkedin.com/in/bharath-raj143/)
-- üíª [GitHub](https://github.com/Bharath-B100)
-- üß© [LeetCode](https://leetcode.com/u/bharathraj143/) ‚Äî 500+ Problems Solved
+- ?? Coimbatore, India
+- ?? bharathrajmurali1010@gmail.com
+- ?? +91 9943935576
+- ?? [LinkedIn](https://www.linkedin.com/in/bharath-raj143/)
+- ?? [GitHub](https://github.com/Bharath-B100)
+- ?? [LeetCode](https://leetcode.com/u/Bharath_Raj_B/) ó 541+ Problems Solved
 
 ---
 
-## üìÑ License
+## ?? License
 
 This project is open source and available under the [MIT License](LICENSE).
