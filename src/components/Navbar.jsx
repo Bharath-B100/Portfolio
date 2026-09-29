@@ -89,7 +89,7 @@ export default function Navbar() {
     };
   }, []);
 
-  const isHome = location.pathname === '/' || location.pathname === '/index.html';
+  const isHome = location.pathname === '/';
   const isCaseStudy = location.pathname.includes('case-studies');
   const isCertifications = location.pathname.includes('certifications');
 

@@ -86,29 +86,21 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home openLightbox={openLightbox} />} />
-        <Route path="/index.html" element={<Home openLightbox={openLightbox} />} />
 
-        {/* Certifications Route (both .html and clean path) */}
-        <Route path="/certifications.html" element={<CertificationsPage openLightbox={openLightbox} />} />
+        {/* Certifications Route */}
         <Route path="/certifications" element={<CertificationsPage openLightbox={openLightbox} />} />
 
-        {/* Case Studies Routes (both .html and clean paths) */}
-        <Route path="/case-studies/dyd-cloths.html" element={<DydCloths />} />
+        {/* Case Studies Routes */}
         <Route path="/case-studies/dyd-cloths" element={<DydCloths />} />
 
-        <Route path="/case-studies/financial-portfolio.html" element={<FinancialPortfolio />} />
         <Route path="/case-studies/financial-portfolio" element={<FinancialPortfolio />} />
 
-        <Route path="/case-studies/hostel-management.html" element={<HostelManagement />} />
         <Route path="/case-studies/hostel-management" element={<HostelManagement />} />
 
-        <Route path="/case-studies/smart-shoe.html" element={<SmartShoe />} />
         <Route path="/case-studies/smart-shoe" element={<SmartShoe />} />
 
-        <Route path="/case-studies/smart-spending.html" element={<SmartSpending />} />
         <Route path="/case-studies/smart-spending" element={<SmartSpending />} />
 
-        <Route path="/case-studies/traveloop.html" element={<Traveloop />} />
         <Route path="/case-studies/traveloop" element={<Traveloop />} />
       </Routes>
 

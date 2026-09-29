@@ -11,7 +11,7 @@ const projectsData = [
       'Synthesized data into interactive Power BI dashboards featuring dynamic budgeting thresholds and predictive savings alerts.'
     ],
     tech: ['Python', 'Pandas', 'Power BI'],
-    link: '/case-studies/smart-spending.html'
+    link: '/case-studies/smart-spending'
   },
   {
     title: 'Financial Portfolio Management System',
@@ -21,7 +21,7 @@ const projectsData = [
       'Integrated a predictive machine learning model to calculate risk-volatility scores, exposing data via optimized PostgreSQL REST APIs that reduced database query latency.'
     ],
     tech: ['React', 'Flask', 'PostgreSQL'],
-    link: '/case-studies/financial-portfolio.html'
+    link: '/case-studies/financial-portfolio'
   },
   {
     title: 'Hostel Management System',
@@ -32,7 +32,7 @@ const projectsData = [
       'Designed a resilient offline-first data synchronization strategy by pairing a MongoDB cloud backend with browser localStorage fallbacks, ensuring uninterrupted session states for 300+ users during network drops.'
     ],
     tech: ['MongoDB', 'Node.js', 'Express.js'],
-    link: '/case-studies/hostel-management.html'
+    link: '/case-studies/hostel-management'
   },
   {
     title: 'Smart Shoe For Visually Impaired',
@@ -44,7 +44,7 @@ const projectsData = [
       'Recognized at multiple conferences with 1st Prize, Runner-Up, and Top 6 Finalist at Vishwakarma Awards, IIT Hyderabad'
     ],
     tech: ['Arduino', 'IoT', 'Embedded Systems'],
-    link: '/case-studies/smart-shoe.html'
+    link: '/case-studies/smart-shoe'
   },
   {
     title: 'DYD-Cloths (E-commerce)',
@@ -55,7 +55,7 @@ const projectsData = [
       'Secured user data and personalized sessions by architecting an authentication flow and an admin inventory dashboard using Node.js and MongoDB.'
     ],
     tech: ['Fabric.js', 'Node.js', 'MongoDB', 'Razorpay'],
-    link: '/case-studies/dyd-cloths.html'
+    link: '/case-studies/dyd-cloths'
   },
   {
     title: 'Traveloop',
@@ -66,7 +66,7 @@ const projectsData = [
       'Optimized data relations for collaborative multi-city trip planning by designing a normalized PostgreSQL schema on Supabase, reducing query complexity for shared itineraries.'
     ],
     tech: ['React', 'Node.js', 'PostgreSQL', 'Supabase'],
-    link: '/case-studies/traveloop.html'
+    link: '/case-studies/traveloop'
   }
 ];
 

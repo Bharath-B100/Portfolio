@@ -148,10 +148,8 @@ export default function About({ openLightbox }) {
                             <li>Introduction To Internet Of Things - NPTEL 2025</li>
                             <li>Agile Methodologies - Techcanvass 2025</li>
                             <li>Java Programming - Great Learning 2024</li>
-                            <li>KPR Certificate 1</li>
-                            <li>KPR Certificate 2</li>
                         </ul>
-                        <Link to="/certifications.html" className="btn-track" style={{marginTop: "20px", display: "inline-flex"}}>
+                        <Link to="/certifications" className="btn-track" style={{marginTop: "20px", display: "inline-flex"}}>
                             <span className="btn secondary-btn small-btn">View All Certificates <i className="fas fa-arrow-right"></i></span>
                         </Link>
                     </div>

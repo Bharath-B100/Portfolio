@@ -95,7 +95,7 @@ export default function Footer({ openLightbox }) {
                             <li><a href="#projects"><i className="fas fa-chevron-right"></i>Projects</a></li>
                             <li><a href="#skills"><i className="fas fa-chevron-right"></i>Skills</a></li>
                             <li><a href="#contact"><i className="fas fa-chevron-right"></i>Contact</a></li>
-                            <li><Link to="/certifications.html"><i className="fas fa-chevron-right"></i>Certifications</Link></li>
+                            <li><Link to="/certifications"><i className="fas fa-chevron-right"></i>Certifications</Link></li>
                         </ul>
                     </nav>
                     <nav className="footer-col footer-projects" aria-label="Live projects">
@@ -117,7 +117,7 @@ export default function Footer({ openLightbox }) {
                                 </a>
                             </li>
                             <li>
-                                <Link to="/case-studies/smart-spending.html">
+                                <Link to="/case-studies/smart-spending">
                                     <i className="fas fa-external-link-alt"></i>Smart Spending
                                 </Link>
                             </li>
