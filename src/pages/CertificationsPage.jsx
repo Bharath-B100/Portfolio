@@ -46,7 +46,9 @@ export default function CertificationsPage({ openLightbox }) {
     "WhatsApp Image 2026-06-30 at 12.20.35 AM.jpeg",
     "WhatsApp Image 2026-06-30 at 12.20.36 AM.jpeg",
     "WhatsApp Image 2026-06-30 at 12.20.37 AM (1).jpeg",
-    "WhatsApp Image 2026-06-30 at 12.20.37 AM.jpeg"
+    "WhatsApp Image 2026-06-30 at 12.20.37 AM.jpeg",
+    "kpr1.jpeg",
+    "kpr 2.jpeg"
   ];
 
   return (
