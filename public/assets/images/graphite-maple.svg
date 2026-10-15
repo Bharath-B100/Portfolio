@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 142" fill="none">
+  <defs>
+    <linearGradient id="paper" x1="28" y1="30" x2="88" y2="113" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fafafa"/>
+      <stop offset=".48" stop-color="#e5e5e5"/>
+      <stop offset=".51" stop-color="#b4b4b4"/>
+      <stop offset="1" stop-color="#f4f4f4"/>
+    </linearGradient>
+  </defs>
+  <!-- Open, toothed lobes and a pale blade preserve the silhouette at small sizes. -->
+  <path d="M60 6 66 26 73 22 71 42 81 36 91 22 92 43 102 39 97 56 112 54 105 67 116 72 99 81 104 89 85 92 89 105 72 100 62 111 51 103 33 111 37 97 18 99 24 87 7 79 17 73 5 61 24 61 19 43 31 48 29 29 43 43 50 46 47 25 54 29Z" fill="url(#paper)" stroke="#555" stroke-width="1.4" stroke-linejoin="round"/>
+  <!-- Principal veins radiate from the petiole, like a real maple leaf. -->
+  <g stroke="#626262" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M61 109Q63 125 55 137" stroke-width="2"/>
+    <path d="M61 110 60 15M61 105 33 37M61 105 12 64M61 105 23 96M61 105 89 31M61 105 106 61M61 105 95 88" stroke-width="1.35"/>
+    <g stroke-width=".8" opacity=".8">
+      <path d="M60 39 54 32M60 49 68 33M60 64 51 50M60 75 70 55M60 89 48 73M48 73 36 62M43 61 39 47M48 73 49 55M38 83 23 78M46 91 32 90M38 83 32 69M74 74 86 63M80 60 83 45M74 74 73 56M84 84 97 78M76 94 88 94M84 84 91 70"/>
+    </g>
+    <!-- Fine pencil hatching, without blur or expensive noise filters. -->
+    <g stroke-width=".55" opacity=".38">
+      <path d="m56 47-2-7m3 18-4-8m4 20-5-10m5 22-6-10m6 22-5-9m12-39 3-8m-3 18 5-10m-5 22 5-10m-5 22 6-11M45 79l-10-7m15 16-10-6m13 13-9-4m26-7 9-7m-5 14 12-7m-5-9 11-8M31 86l-10-3m13 11-6-1m50 8 5 1"/>
+    </g>
+  </g>
+</svg>

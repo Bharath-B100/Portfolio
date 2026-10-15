@@ -1,0 +1,5 @@
+Generated with the built-in image generation tool.
+Asset: src/assets/graphite-leaf.png
+
+Prompt:
+Create a website animation sprite: exactly ONE isolated delicate graphite pencil drawing of a natural maple leaf on a truly transparent background. Full leaf with short thin gently curved stem, five pointed toothed lobes, asymmetrical organic shape, intricate branching veins, fine pencil hatching and soft silvery grey shading. Pale grey blade with readable charcoal veins and subtly darker folds, not a solid black silhouette, not a flat icon. Botanical pencil sketch, elegant and realistic. Top-down view slightly tilted 20 degrees. Leaf occupies 85% of square image with transparent padding all around, no cropping. No text, no other leaves, no background paper, no cast shadow. Must remain legible as a 40-70 pixel decorative leaf on a white minimalist portfolio.

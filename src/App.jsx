@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Lightbox from './components/Lightbox';
 import PageTransitionOverlay from './components/PageTransitionOverlay';
 import Preloader from './components/Preloader';
+import FallingLeaves from './components/FallingLeaves';
 
 import Home from './pages/Home';
 import CertificationsPage from './pages/CertificationsPage';
@@ -81,6 +82,7 @@ function App() {
 
       <Preloader />
       <PageTransitionOverlay />
+      <FallingLeaves />
       
       <Navbar />
 

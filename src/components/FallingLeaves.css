@@ -1,0 +1,31 @@
+.falling-leaves-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 3;
+  contain: strict;
+}
+
+.falling-leaf {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: auto;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+  transform-origin: 50% 65%;
+}
+
+.falling-leaves-container[hidden] {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .falling-leaves-container {
+    display: none;
+  }
+}

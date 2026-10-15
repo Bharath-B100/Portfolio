@@ -8,24 +8,36 @@ export default function Navbar() {
   const location = useLocation();
 
   useEffect(() => {
-    let lastScrollY = 0;
+    let lastScrollY = Math.max(0, window.pageYOffset);
+    let direction = 0;
+    let distance = 0;
+    let frame = 0;
     let scrollSpyTicking = false;
 
     const handleScroll = () => {
       if (!scrollSpyTicking) {
-        window.requestAnimationFrame(() => {
-          const scrollY = window.pageYOffset;
-          
+        frame = window.requestAnimationFrame(() => {
+          const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+          const scrollY = Math.max(0, Math.min(window.pageYOffset, maxScroll));
+          const delta = scrollY - lastScrollY;
           setScrolled(scrollY > 50);
-          
-          if (scrollY > lastScrollY && scrollY > 150) {
-            setHiddenCircle(true);
-          } else if (scrollY < lastScrollY || scrollY <= 150) {
-            setHiddenCircle(false);
-          }
-          
-          lastScrollY = scrollY <= 0 ? 0 : scrollY;
 
+          // Ignore subpixel noise and accumulate deliberate travel in one
+          // direction before reversing visibility (trackpad momentum can wobble).
+          if (scrollY <= 150) {
+            setHiddenCircle(false);
+            direction = 0;
+            distance = 0;
+          } else if (Math.abs(delta) >= 1) {
+            const nextDirection = Math.sign(delta);
+            distance = nextDirection === direction ? distance + Math.abs(delta) : Math.abs(delta);
+            direction = nextDirection;
+            if (distance >= (direction > 0 ? 32 : 20)) {
+              setHiddenCircle(direction > 0);
+              distance = 0;
+            }
+          }
+          lastScrollY = scrollY;
           // For scrollspy active state on Home page sections
           if (location.pathname === '/') {
             const sections = document.querySelectorAll('section[id]');
@@ -55,6 +67,7 @@ export default function Navbar() {
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.cancelAnimationFrame(frame);
     };
   }, [location.pathname]);
 
@@ -93,7 +106,7 @@ export default function Navbar() {
   const isCaseStudy = location.pathname.includes('case-studies');
   const isCertifications = location.pathname.includes('certifications');
 
-  const navbarClass = `scrolled ${hiddenCircle ? 'hidden-circle' : ''}`;
+  const navbarClass = `scrolled ${hiddenCircle && !menuActive ? 'hidden-circle' : ''}`;
 
   return (
     <nav id="navbar" className={isHome ? (scrolled ? navbarClass : '') : navbarClass}>
@@ -137,3 +150,4 @@ export default function Navbar() {
     </nav>
   );
 }
+
